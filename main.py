@@ -18,5 +18,27 @@ app=Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/login', methods=['POST'])
+def login():
+    username = request.get_json(force=True).get('username')
+    if not username:
+        abort(401)
+
+    conversation = get_chatroom('My Room')
+    try:
+        conversation.participants.create(identity=username)
+    except TwilioRestException as exc:
+        # do not error if the user is already in the conversation
+        if exc.status != 409:
+            raise
+
+    token = AccessToken(twilio_account_sid, twilio_api_key_sid,
+                        twilio_api_key_secret, identity=username)
+    token.add_grant(VideoGrant(room='My Room'))
+    token.add_grant(ChatGrant(service_sid=conversation.chat_service_sid))
+
+    return {'token': token.to_jwt().decode(),
+            'conversation_sid': conversation.sid}
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
