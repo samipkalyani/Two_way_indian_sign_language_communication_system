@@ -14,6 +14,16 @@ twilio_client = Client(twilio_api_key_sid, twilio_api_key_secret,twilio_account_
 
 app=Flask(__name__)
 
+
+def get_chatroom(name):
+    for conversation in twilio_client.conversations.conversations.list():
+        if conversation.friendly_name == name:
+            return conversation
+
+    # a conversation with the given name does not exist ==> create a new one
+    return twilio_client.conversations.conversations.create(
+        friendly_name=name)
+
 @app.route('/')
 def index():
     return render_template('index.html')
