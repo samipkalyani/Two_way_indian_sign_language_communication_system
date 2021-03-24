@@ -309,7 +309,7 @@ function startrec(participant_id){
                 recordedChunks.push(event.data);
                 console.log(recordedChunks);
                 blob = new Blob(recordedChunks, {
-                type: "video/webm"
+                    type: "video/mp4"
                 });
                 var url = URL.createObjectURL(blob);
                 var a = document.createElement("a");
@@ -317,7 +317,7 @@ function startrec(participant_id){
                 a.style = "display: none";
                 console.log(url)
                 a.href = url;
-                a.download = "test.webm";
+                a.download = "test.mp4";
                 a.click();
                 window.URL.revokeObjectURL(url);
                 recordedChunks=[];
@@ -325,6 +325,7 @@ function startrec(participant_id){
                     method: 'POST',
                 }).then(res => res.json()).then(_data => {
                     data = _data;
+                    console.log(data)
                     btnSubmit.disabled=true
                     start.disabled=true
                     stop.disabled=true

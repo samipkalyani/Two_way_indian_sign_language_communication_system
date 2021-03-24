@@ -5,6 +5,7 @@ from twilio.jwt.access_token import AccessToken
 from twilio.jwt.access_token.grants import VideoGrant, ChatGrant
 from twilio.rest import Client
 from twilio.base.exceptions import TwilioRestException
+import build
 
 load_dotenv()
 twilio_account_sid = os.environ.get('TWILIO_ACCOUNT_SID')
@@ -52,6 +53,8 @@ def login():
 
 @app.route('/recognition',methods=['POST'])
 def recognition():
+    b = build.main('./protected/test','./output')
+    b.build()
     return {'status': 200, 'data': 'recognition started'}
     
 
