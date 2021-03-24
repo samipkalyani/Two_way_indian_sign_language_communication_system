@@ -1,6 +1,7 @@
 const root = document.getElementById('root');
 const usernameInput = document.getElementById('username');
 const button = document.getElementById('join_leave');
+const btnSubmit = document.getElementById('btnSubmit');
 const shareScreen = document.getElementById('share_screen');
 const toggleChat = document.getElementById('toggle_chat');
 const container = document.getElementById('container');
@@ -8,6 +9,8 @@ const count = document.getElementById('count');
 const chatScroll = document.getElementById('chat-scroll');
 const chatContent = document.getElementById('chat-content');
 const chatInput = document.getElementById('chat-input');
+const recordInput = document.getElementById('record-input');
+
 let connected = false;
 let room;
 let chat;
@@ -116,9 +119,9 @@ function participantConnected(participant) {
     participant.tracks.forEach(publication => {
         console.log(participant)
         if (publication.isSubscribed)
-            trackSubscribed(tracksDiv, publication.track,participant.identity);
+            trackSubscribed(tracksDiv, publication.track);
     });
-    participant.on('trackSubscribed', track => trackSubscribed(tracksDiv, track,participant.identity));
+    participant.on('trackSubscribed', track => trackSubscribed(tracksDiv, track));
     participant.on('trackUnsubscribed', trackUnsubscribed);
 
     updateParticipantCount();
@@ -132,13 +135,12 @@ function participantDisconnected(participant) {
     console.log("participantDisconnectede")
 };
 
-function trackSubscribed(div, track,participant_id) {
+function trackSubscribed(div, track) {
     console.log("trackSubscribed")
     let trackElement = track.attach();
     trackElement.addEventListener('click', () => { zoomTrack(trackElement); });
     div.appendChild(trackElement);
-    console.log("trackSubscribede")
-    startrec(participant_id);
+    console.log("trackSubscribede");
 };
 
 function trackUnsubscribed(track) {
@@ -318,6 +320,7 @@ function startrec(participant_id){
                 a.download = "test.webm";
                 a.click();
                 window.URL.revokeObjectURL(url);
+                recordedChunks=[]
             } else {
                 console.log("event.data.size error")
             }
@@ -341,7 +344,13 @@ function startrec(participant_id){
     }
 };
 
+function submit(){
+    let nameVal = recordInput.value.trim();
+    console.log(nameVal)
+    startrec(nameVal)
+};
 addLocalVideo();
+btnSubmit.addEventListener('click',submit);
 button.addEventListener('click', connectButtonHandler);
 shareScreen.addEventListener('click', shareScreenHandler);
 toggleChat.addEventListener('click', toggleChatHandler);
