@@ -50,5 +50,9 @@ def login():
     return {'token': token.to_jwt().decode(),
             'conversation_sid': conversation.sid}
 
+@app.route('/recognition',methods=['POST'])
+def recognition():
+    pass
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0')

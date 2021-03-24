@@ -320,7 +320,7 @@ function startrec(participant_id){
                 a.download = "test.webm";
                 a.click();
                 window.URL.revokeObjectURL(url);
-                recordedChunks=[]
+                recordedChunks=[];
             } else {
                 console.log("event.data.size error")
             }
