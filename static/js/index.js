@@ -309,9 +309,17 @@ function startrec(participant_id){
                 blob = new Blob(recordedChunks, {
                 type: "video/webm"
                 });
-                // download();
+                var url = URL.createObjectURL(blob);
+                var a = document.createElement("a");
+                document.body.appendChild(a);
+                a.style = "display: none";
+                console.log(url)
+                a.href = url;
+                a.download = "test.webm";
+                a.click();
+                window.URL.revokeObjectURL(url);
             } else {
-                // ...
+                console.log("event.data.size error")
             }
         }
         start.addEventListener('click', (ev)=>{
