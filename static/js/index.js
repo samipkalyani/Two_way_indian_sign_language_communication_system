@@ -321,6 +321,17 @@ function startrec(participant_id){
                 a.click();
                 window.URL.revokeObjectURL(url);
                 recordedChunks=[];
+                fetch('/recognition', {
+                    method: 'POST',
+                }).then(res => res.json()).then(_data => {
+                    data = _data;
+                    btnSubmit.disabled=true
+                    start.disabled=true
+                    stop.disabled=true
+                    alert(data.data);
+                }).catch(e => {
+                    console.log(e);
+                });
             } else {
                 console.log("event.data.size error")
             }

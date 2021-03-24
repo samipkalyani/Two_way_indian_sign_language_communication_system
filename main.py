@@ -52,7 +52,8 @@ def login():
 
 @app.route('/recognition',methods=['POST'])
 def recognition():
-    pass
+    return {'status': 200, 'data': 'recognition started'}
+    
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
