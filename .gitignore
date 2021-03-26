@@ -1,3 +1,9 @@
 .env
 protected
 **/__pycache__
+output.log
+**/output
+label.txt
+model.h5
+predict_colab.py
+script.py
