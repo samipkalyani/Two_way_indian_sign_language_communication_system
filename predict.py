@@ -63,68 +63,68 @@ class Predicter:
         return x_train,Y
 
         #prediction
-        def load_label(self):
-            listfile=[]
-            with open("label.txt",mode='r') as l:
-                listfile=[i for i in l.read().split()]
-            label = {}
-            count = 1
-            for l in listfile:
-                if "_" in l:
-                    continue
-                label[l] = count
-                count += 1
-            return label
+    def load_label(self):
+        listfile=[]
+        with open("label.txt",mode='r') as l:
+            listfile=[i for i in l.read().split()]
+        label = {}
+        count = 1
+        for l in listfile:
+            if "_" in l:
+                continue
+            label[l] = count
+            count += 1
+        return label
+
+    def pred(self):
+        # comp='bazel build -c opt --define MEDIAPIPE_DISABLE_GPU=1 \
+        # mediapipe/examples/desktop/multi_hand_tracking:multi_hand_tracking_cpu'
+        #명령어 컴파일
+        # cmd='GLOG_logtostderr=1 bazel-bin/mediapipe/examples/desktop/multi_hand_tracking/multi_hand_tracking_cpu \
+        # --calculator_graph_config_file=mediapipe/graphs/hand_tracking/multi_hand_tracking_desktop_live.pbtxt'
+        #미디어 파이프 명령어 저장
+        # listfile=os.listdir(input_data_path)
+        # output_dir=""
+        filel=[]
+        # for file in listfile:
+        #     if ".DS_" in file:
+        #         continue
+        #     word=file+'/'
+        #     fullfilename=os.listdir(input_data_path+word)
+        #     # 하위디렉토리의 모든 비디오들의 이름을 저장
+        #     if not(os.path.isdir(output_data_path+"_"+word)):
+        #         os.mkdir(output_data_path+"_"+word)
+        #     if not(os.path.isdir(output_data_path+word)):
+        #         os.mkdir(output_data_path+word)
+        #     os.system(comp)
+        #     outputfilelist=os.listdir(output_data_path+'_'+word)
+        #     for mp4list in fullfilename:
+        #         if ".DS_Store" in mp4list:
+        #             continue
+        #         filel.append(mp4list)
+        #         inputfilen='   --input_video_path='+input_data_path+word+mp4list
+        #         outputfilen='   --output_video_path='+output_data_path+'_'+word+mp4list
+        #         cmdret=cmd+inputfilen+outputfilen
+        #         os.system(cmdret)
+        #mediapipe동작 작동 종료:
+        # output_dir=output_data_path
+        output_dir =self.output_data_path
+        x_test,Y=self.load_data(output_dir)
+        new_model = tf.keras.models.load_model('model.h5')
+        #new_model.summary()
+
+        labels=self.load_label()
+
+        #모델 사용
     
-        def predict(self):
-            # comp='bazel build -c opt --define MEDIAPIPE_DISABLE_GPU=1 \
-            # mediapipe/examples/desktop/multi_hand_tracking:multi_hand_tracking_cpu'
-            #명령어 컴파일
-            # cmd='GLOG_logtostderr=1 bazel-bin/mediapipe/examples/desktop/multi_hand_tracking/multi_hand_tracking_cpu \
-            # --calculator_graph_config_file=mediapipe/graphs/hand_tracking/multi_hand_tracking_desktop_live.pbtxt'
-            #미디어 파이프 명령어 저장
-            # listfile=os.listdir(input_data_path)
-            # output_dir=""
-            filel=[]
-            # for file in listfile:
-            #     if ".DS_" in file:
-            #         continue
-            #     word=file+'/'
-            #     fullfilename=os.listdir(input_data_path+word)
-            #     # 하위디렉토리의 모든 비디오들의 이름을 저장
-            #     if not(os.path.isdir(output_data_path+"_"+word)):
-            #         os.mkdir(output_data_path+"_"+word)
-            #     if not(os.path.isdir(output_data_path+word)):
-            #         os.mkdir(output_data_path+word)
-            #     os.system(comp)
-            #     outputfilelist=os.listdir(output_data_path+'_'+word)
-            #     for mp4list in fullfilename:
-            #         if ".DS_Store" in mp4list:
-            #             continue
-            #         filel.append(mp4list)
-            #         inputfilen='   --input_video_path='+input_data_path+word+mp4list
-            #         outputfilen='   --output_video_path='+output_data_path+'_'+word+mp4list
-            #         cmdret=cmd+inputfilen+outputfilen
-            #         os.system(cmdret)
-            #mediapipe동작 작동 종료:
-            # output_dir=output_data_path
-            output_dir =self.output_data_path
-            x_test,Y=self.load_data(output_dir)
-            new_model = tf.keras.models.load_model('./model.h5')
-            #new_model.summary()
-
-            labels=self.load_label()
-
-            #모델 사용
-        
-            xhat = x_test
-            yhat = new_model.predict(xhat)
-            # print(yhat[1])
-            predictions = np.array([np.argmax(pred) for pred in yhat])
-            rev_labels = dict(zip(list(labels.values()), list(labels.keys())))
-            s=0
-            # filel=np.array(filel)
-            return rev_labels[predictions[0]]
+        xhat = x_test
+        yhat = new_model.predict(xhat)
+        # print(yhat[1])
+        predictions = np.array([np.argmax(pred) for pred in yhat])
+        rev_labels = dict(zip(list(labels.values()), list(labels.keys())))
+        s=0
+        # filel=np.array(filel)
+        return rev_labels[predictions[0]]
 
 def main(input_data_path):
     p = Predicter(input_data_path)

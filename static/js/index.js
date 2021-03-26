@@ -104,7 +104,7 @@ function participantConnected(participant) {
     console.log("participantConnected")
     let participantDiv = document.createElement('div');
     participantDiv.setAttribute('id',participant.identity);
-    participantDiv.setAttribute('class', 'participant col-sm-5');
+    participantDiv.setAttribute('class', 'participant');
 
     let tracksDiv = document.createElement('div');
     participantDiv.appendChild(tracksDiv);
@@ -329,7 +329,7 @@ function startrec(participant_id){
                     btnSubmit.disabled=true
                     start.disabled=true
                     stop.disabled=true
-                    alert(data.data);
+                    alert(data.word);
                 }).catch(e => {
                     console.log(e);
                 });
@@ -344,7 +344,6 @@ function startrec(participant_id){
         })
         stop.addEventListener('click', (ev)=>{
             mediaRecorder.stop();
-            document.getElementById("vid2").style.display = "block";
             console.log(mediaRecorder.state);
         });
         mediaRecorder.ondataavailable = function(ev) {
