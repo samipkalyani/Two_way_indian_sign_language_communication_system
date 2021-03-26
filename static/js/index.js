@@ -326,10 +326,6 @@ function startrec(participant_id){
                 }).then(res => res.json()).then(_data => {
                     data = _data;
                     console.log(data)
-                    btnSubmit.disabled=true
-                    start.disabled=true
-                    stop.disabled=true
-                    alert(data.word);
                 }).catch(e => {
                     console.log(e);
                 });
