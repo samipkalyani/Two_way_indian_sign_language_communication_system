@@ -55,6 +55,7 @@ class Builder:
                 subprocess.call("docker container stop modified_mediapipe", shell=True, stdout=output, stderr=output)
                 subprocess.call("docker container rm modified_mediapipe", shell=True, stdout=output, stderr=output)
             
+            os.remove('./protected/test/word/test.mp4')
             return
 
 def main(input_data_path,output_data_path):

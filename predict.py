@@ -18,6 +18,7 @@ import tensorflow as tf
 print(tf.__version__)
 from numpy import argmax
 import argparse
+import shutil
 
 
 class Predicter:
@@ -124,6 +125,9 @@ class Predicter:
         rev_labels = dict(zip(list(labels.values()), list(labels.keys())))
         s=0
         # filel=np.array(filel)
+        shutil.rmtree('./output')
+        os.mkdir('./output')
+        
         return rev_labels[predictions[0]]
 
 def main(input_data_path):
