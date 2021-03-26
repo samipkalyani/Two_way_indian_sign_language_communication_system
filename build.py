@@ -11,7 +11,7 @@ class Builder:
         self.output_data_path = output_data_path
 
     def build(self):
-        outputFile = open("sample.txt","r+")
+        outputFile = open("output.log","r+")
         outputFile.truncate(0)
         outputFile.close()
         
@@ -38,18 +38,18 @@ class Builder:
             # os.system("set-variable -name DISPLAY -value 192.168.43.72:0.0")
 
             with open("output.log", "a") as output:
-                subprocess.call("docker run -itd -e DISPLAY=$DISPLAY --name modified_mediapipe modified_mediapipe", shell=True, stdout=output, stderr=output)
-                subprocess.call("docker cp ./protected/test modified_mediapipe:/mediapipe", shell=True, stdout=output, stderr=output)
-                subprocess.call("docker cp ./output/ modified_mediapipe:/mediapipe", shell=True, stdout=output, stderr=output)
+                subprocess.run("docker run -itd -e DISPLAY=$DISPLAY --name modified_mediapipe modified_mediapipe", shell=True, stdout=output, stderr=output)
+                subprocess.run("docker cp ./protected/test modified_mediapipe:/mediapipe", shell=True, stdout=output, stderr=output)
+                subprocess.run("docker cp ./output/ modified_mediapipe:/mediapipe", shell=True, stdout=output, stderr=output)
                 
             shutil.rmtree('./output')
 
             with open("output.log", "a") as output:
-                subprocess.call("docker cp script.py  modified_mediapipe:/mediapipe", shell=True, stdout=output, stderr=output)
-                subprocess.call("docker exec -itd modified_mediapipe python script.py", shell=True, stdout=output, stderr=output)
-          
+                subprocess.run("docker cp script.py  modified_mediapipe:/mediapipe", shell=True, stdout=output, stderr=output)
+                subprocess.run("docker exec -itd modified_mediapipe python script.py", shell=True, stdout=output, stderr=output, timeout=None)
+
             with open("output.log", "a") as output:
-                subprocess.call("docker cp modified_mediapipe:/mediapipe/output .", shell=True, stdout=output, stderr=output)
+                subprocess.run("docker cp modified_mediapipe:/mediapipe/output .", shell=True, stdout=output, stderr=output,timeout=None)
             
             with open("output.log", "a") as output:
                 subprocess.call("docker container stop modified_mediapipe", shell=True, stdout=output, stderr=output)

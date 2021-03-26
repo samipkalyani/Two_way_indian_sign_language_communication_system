@@ -15,7 +15,6 @@ from keras import optimizers
 from keras.layers import SimpleRNN, Dense
 from keras.layers import Bidirectional
 import tensorflow as tf
-print(tf.__version__)
 from numpy import argmax
 import argparse
 import shutil

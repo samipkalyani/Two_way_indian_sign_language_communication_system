@@ -59,10 +59,9 @@ def login():
 
 @app.route('/recognition',methods=['POST'])
 def recognition():
-    # b = build.main('./protected/test/','./output/')
-    # b.build()
+    b = build.main('./protected/test/','./output/')
+    b.build()
     p = predict.main('./output/Absolute/')
-    print(p)
     word = p.pred()
     print(word)
     return {'status': 200,'word': word}
