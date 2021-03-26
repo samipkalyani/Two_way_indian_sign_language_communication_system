@@ -56,8 +56,9 @@ def login():
 def recognition():
     b = build.main('./protected/test/','./output/')
     b.build()
-    p = predict.main()
+    p = predict.main('./output/Absolute/')
     word = p.predict()
+    print(word)
     return {'status': 200,'word': word}
     
 
