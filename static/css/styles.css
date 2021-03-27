@@ -1,11 +1,23 @@
-#vid2{
-	display: block;
-    width: 50%;
-    margin: 0 auto;
+.logo{
+	text-align: center;
 }
+
+h3{
+	display: inline-block;
+}
+
 video{
 	width: 100%;
 }
-.col-sm-5 {
-    display: inline-block;
+
+#recording{
+	display: none;
+}
+
+.login{
+	text-align: center;
+}
+
+#root{
+	display: none;
 }
