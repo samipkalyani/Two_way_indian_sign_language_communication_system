@@ -273,14 +273,14 @@ function startrec(participant_id){
             if (event.data.size > 0) {
                 recordedChunks.push(event.data);
                 blob = new Blob(recordedChunks, {
-                    type: "video/mp4"
+                    type: "video/webm"
                 });
                 var url = URL.createObjectURL(blob);
                 var a = document.createElement("a");
                 document.body.appendChild(a);
                 a.style = "display: none";
                 a.href = url;
-                a.download = "test.mp4";
+                a.download = "test.webm";
                 a.click();
                 window.URL.revokeObjectURL(url);
                 recordedChunks=[];

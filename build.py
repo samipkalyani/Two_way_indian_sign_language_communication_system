@@ -34,9 +34,6 @@ class Builder:
             if not(os.path.isdir(self.output_data_path+"Absolute/"+word)):
                 os.mkdir(self.output_data_path+"Absolute/"+word)
 
-            
-            # os.system("set-variable -name DISPLAY -value 192.168.43.72:0.0")
-
             with open("output.log", "a") as output:
                 subprocess.run("docker run -itd -e DISPLAY=$DISPLAY --name modified_mediapipe modified_mediapipe", shell=True, stdout=output, stderr=output)
                 subprocess.run("docker cp ./protected/test modified_mediapipe:/mediapipe", shell=True, stdout=output, stderr=output)
