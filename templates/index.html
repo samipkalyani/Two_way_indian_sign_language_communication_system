@@ -8,35 +8,36 @@
 
         <!--  CSS -->
         
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+        <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}"> -->
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
 
         <!-- Bootstrap -->
-       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+      
     </head>
     <body>
-        <!-- <img src="{{ url_for('static', filename='assets/logo.jpg') }}"> -->
+    	<!-- <img src="{{ url_for('static', filename='assets/logo.jpg') }}"> -->
 
-        <div class = "logo" id="userlogin">
-            <div class="top"></div>
-            <div class="bottom"></div>
-            <div class="center">
-                <img src="{{ url_for('static', filename='logo.jpg') }}" alt="logo" width="150">
+    	<div class = "logo" id="userlogin">
+    		<div class="top"></div>
+    		<div class="bottom"></div>
+    		<div class="center">
+	    		<img src="{{ url_for('static', filename='logo.png') }}" alt="logo" width="150">
 
-                <h3>Bol.io</h3>
-                <form class="login">
-                    <label for="username">Name: </label>
-                    <input type="text" name=”username” id="username">
-                    <button id="join_leave">Join call</button>
-                    <button id="share_screen" disabled>Share screen</button>
-                    <button id="toggle_chat" disabled>Toggle chat</button>
-                </form>
-            </div>
+	        	<h3>Bol.io</h3>
+	        	<form class="login">
+		            <label for="username">Name: </label>
+		            <input type="text" name=”username” id="username">
+		            <button id="join_leave">Join call</button>
+		            <button id="share_screen" disabled>Share screen</button>
+		            <button id="toggle_chat" disabled>Toggle chat</button>
+		        </form>
+		    </div>
         </div>
 
-            
+        	
         
        
         <!-- <form>
@@ -47,40 +48,43 @@
             <button id="toggle_chat" disabled>Toggle chat</button>
         </form> -->
         <div id ="recording">
-            <p>Record video</p>
-            <input id="record-input" type="text">
-            <button id ="btnSubmit">Submit</button>
+	        <label>Record video</label>
+	        <input id="record-input" type="text">
+	        <button id ="btnSubmit">Submit</button>
 
-            <p><button id="btnStart">START RECORDING</button><br/>
-            <button id="btnStop">STOP RECORDING</button><br>
+	        <button id="btnStart">START RECORDING</button>
+	        <button id="btnStop">STOP RECORDING</button>
 
-            
-            <button id="btnRec">RECOGNIZE</button></p>
-        </div>
+	        
+	        <button id="btnRec">RECOGNIZE</button>
+    	</div>
         <video id="vid2" style='display:none;' controls></video>
         <!-- could save to canvas and do image manipulation and saving too -->
  
         <p id="count">Disconnected.</p>
         <div class="container-fluid">
-            <div id="root" class="row">
-                <div  class="col-sm-9">
+	        <div id="root" class="row">
+	            <div  class="col-sm-9">
                     <div id="container" class="row">
-                       <div id="local" class="participant col-sm-6"><div></div><div class="label">Me</div></div>
+	                   <div id="local" class="participant col-sm-6"><div></div><div class="label">Me</div></div>
                     </div>
-                </div>
-                <div id="chat" class="col-sm-3">
-                    <div id="chat-scroll">
-                        <div id="chat-content">
-                        </div>
-                    </div>
+	            </div>
+                <div class="col-sm-3">
+    	            <div id="chat" >
+    	                <div id="chat-scroll">
+    	                    <div id="chat-content">
+    	                    </div>
+    	                </div>
+    	                
+    	            </div>
                     <input id="chat-input" type="text">
                 </div>
-            </div>
-        </div>
+	        </div>
+    	</div>
         <script src="https://media.twiliocdn.com/sdk/js/video/releases/2.3.0/twilio-video.min.js"></script>
         <script src="https://media.twiliocdn.com/sdk/js/conversations/releases/1.0.0/twilio-conversations.min.js"></script>
         
         <script src="{{ url_for('static', filename='js/index.js') }}"></script>
-        <!-- <script src="/home/nvasani/Desktop/be-neel/static/js/index.js"></script> -->
+       	<!-- <script src="/home/nvasani/Desktop/be-neel/static/js/index.js"></script> -->
     </body>
 </html> 

@@ -1,5 +1,5 @@
-.logo{
-	text-align: center;
+body{
+	background-image: url('bg.png');
 }
 
 h3{
@@ -11,13 +11,32 @@ video{
 }
 
 #recording{
-	display: none;
-}
-
-.login{
+	display: block;
 	text-align: center;
 }
 
+
+.login{
+	display: inline-block;
+	float: right;
+	margin-top: 32px;
+}
 #root{
-	display: none;
+	display: block;
+}
+#chat-scroll{
+	margin-top: 10px;
+	position: relative;
+	overflow: hidden;
+}
+#chat{
+	border: 1px solid;
+	border-radius: 10px;
+	overflow-y: scroll;
+	min-height: 358.317px;
+	max-height: 700px;
+	padding: 10px;
+}
+#chat-input{
+	width:100%;
 }

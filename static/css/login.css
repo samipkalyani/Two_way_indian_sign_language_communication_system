@@ -12,6 +12,7 @@
 	 width: 100%;
 	 height: 100%;
 	 overflow: hidden;
+
 }
  .logo:hover .top:before, .logo:active .top:before, .logo:hover .bottom:before, .logo:active .bottom:before, .logo:hover .top:after, .logo:active .top:after, .logo:hover .bottom:after, .logo:active .bottom:after {
 	 margin-left: 200px;
@@ -79,6 +80,16 @@
 	 border: 1px solid #ccc;
 	 font-family: inherit;
 }
-h3{
-	display: inline-block;
+#recording{
+	display: none;
 }
+#root{
+	display: none;
+}
+.login{
+	text-align:center;
+}
+
+
+
+

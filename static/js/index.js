@@ -38,9 +38,13 @@ function connectButtonHandler(event) {
         button.disabled = true;
         button.innerHTML = 'Connecting...';
         connect(username).then(() => {
-            document.styleSheets[1].disabled = true;
-            document.getElementById("recording").style.display = "block";
-            document.getElementById("root").style.display = "block";
+            document.styleSheets[0].disabled = true;
+            var head = document.head;
+            var link = document.createElement("link");
+            link.type = "text/css";
+            link.rel = "stylesheet";
+            link.href = "static/css/style.css"
+            head.appendChild(link);
             button.innerHTML = 'Leave call';
             button.disabled = false;
             shareScreen.disabled = false;
@@ -52,9 +56,9 @@ function connectButtonHandler(event) {
     }
     else {
         disconnect();
-        document.styleSheets[1].disabled = false;
-        document.getElementById("recording").style.display = "none";
-        document.getElementById("root").style.display = "none";
+        document.styleSheets[0].disabled = false;
+        var elements = document.querySelectorAll('link[rel=stylesheet]');
+        elements[2].parentNode.removeChild(elements[2]);
         button.innerHTML = 'Join call';
         connected = false;
         shareScreen.innerHTML = 'Share screen';
