@@ -63,6 +63,7 @@ function connectButtonHandler(event) {
 };
 
 function connect(username) {
+    // localStorage.setItem("username",username)
     let promise = new Promise((resolve, reject) => {
         // get a token from the back end
         let data;
@@ -317,12 +318,18 @@ function submit(){
     startrec(nameVal)
 };
 
+function addRecognitionToChat(word){
+    let username = localStorage.getItem("username");
+    addMessageToChat(username,word)
+}
+
 function recognition(){
     fetch('/recognition', {
         method: 'POST',
     }).then(res => res.json()).then(_data => {
         data = _data;
         console.log(data)
+        // addRecognitionToChat(data.word);
     }).catch(e => {
         console.log(e);
     });
