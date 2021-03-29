@@ -303,10 +303,14 @@ function startrec(participant_id){
         start.addEventListener('click', (ev)=>{
             mediaRecorder.ondataavailable = handleDataAvailable;
             mediaRecorder.start();
+
+            document.getElementById("change").className = "fa fa-pause";
         })
         stop.addEventListener('click', (ev)=>{
             mediaRecorder.stop();
+            document.getElementById("change").className = "fa fa-play";
             document.getElementById("vid2").style.display = "block";
+            document.getElementById("cross").style.display = "block";
         });
         mediaRecorder.ondataavailable = function(ev) {
             chunks.push(ev.data);

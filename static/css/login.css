@@ -91,7 +91,6 @@
 }
 button{
 	border-radius:10px;
-	border:1px solid;
 	background-color: white;
 	font-size: 20px;
 }
@@ -103,12 +102,14 @@ button:active{
 #join_leave{
 	background-color: white;
 	color: green;
+	border:1px solid green;
 	font-size: 20px;
 
 }
 #join_leave:hover, #join_leave:active{
 	background-color: green;
 	color: white;
+	border:1px solid green;
 	font-size: 20px;
 }
 #cross{
