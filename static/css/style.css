@@ -88,3 +88,7 @@ button:active{
     opacity: 1;
     transform: translate(0%, -50%);
 }
+.label{
+	font-size: 20px;
+	color: black;
+}

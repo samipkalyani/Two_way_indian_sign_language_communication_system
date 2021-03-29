@@ -106,7 +106,7 @@ function updateParticipantCount() {
 function participantConnected(participant) {
     let participantDiv = document.createElement('div');
     participantDiv.setAttribute('id',participant.identity);
-    participantDiv.setAttribute('class', 'participant  col-sm-5');
+    participantDiv.setAttribute('class', 'participant  col-sm-6');
 
     let tracksDiv = document.createElement('div');
     participantDiv.appendChild(tracksDiv);
@@ -354,7 +354,7 @@ addLocalVideo();
 btnSubmit.addEventListener('click',submit);
 cross.addEventListener('click',close);
 btnRec.addEventListener('click',recognition);
-btnGen.addEventListener('click',generation);
+// btnGen.addEventListener('click',generation);
 button.addEventListener('click', connectButtonHandler);
 // shareScreen.addEventListener('click', shareScreenHandler);
 // toggleChat.addEventListener('click', toggleChatHandler);
