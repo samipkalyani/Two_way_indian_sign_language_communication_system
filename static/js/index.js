@@ -3,6 +3,7 @@ const usernameInput = document.getElementById('username');
 const button = document.getElementById('join_leave');
 const btnSubmit = document.getElementById('btnSubmit');
 const btnRec = document.getElementById('btnRec');
+const btnGen = document.getElementById('btnGen');
 const shareScreen = document.getElementById('share_screen');
 const toggleChat = document.getElementById('toggle_chat');
 const container = document.getElementById('container');
@@ -334,9 +335,21 @@ function recognition(){
     });
 };
 
+function generation(){
+    fetch('/generation', {
+        method: 'GET',
+    }).then(res => res.json()).then(_data => {
+        data = _data;
+        console.log(data)
+    }).catch(e => {
+        console.log(e);
+    });
+};
+
 addLocalVideo();
 btnSubmit.addEventListener('click',submit);
 btnRec.addEventListener('click',recognition);
+btnGen.addEventListener('click',generation);
 button.addEventListener('click', connectButtonHandler);
 shareScreen.addEventListener('click', shareScreenHandler);
 toggleChat.addEventListener('click', toggleChatHandler);
