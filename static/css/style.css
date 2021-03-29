@@ -13,6 +13,7 @@ video{
 #recording{
 	display: block;
 	text-align: center;
+	margin-top: 10px;
 }
 
 
@@ -36,7 +37,11 @@ video{
 	min-height: 358.317px;
 	max-height: 700px;
 	padding: 10px;
+	background-color: white;
 }
 #chat-input{
 	width:100%;
+}
+.center{
+	background-color: whitesmoke;
 }
