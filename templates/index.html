@@ -12,9 +12,10 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
 
         <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+        <!-- Font awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+        
       
     </head>
     <body>
@@ -24,32 +25,43 @@
     		<div class="top"></div>
     		<div class="bottom"></div>
     		<div class="center">
-	    		<img src="{{ url_for('static', filename='logo.png') }}" alt="logo" width="150">
+	    		<!-- <img src="{{ url_for('static', filename='logo.png') }}" alt="logo" width="150"> -->
 
 	        	<h3>Bol.io</h3>
 	        	<form class="login">
-		            <label for="username">Name: </label>
-		            <input type="text" name=”username” id="username">
-		            <button id="join_leave">Join call</button>
-		            <button id="share_screen" disabled>Share screen</button>
-		            <button id="toggle_chat" disabled>Toggle chat</button>
+		            
+		            <input type="text" name=”username” id="username" placeholder="Name">
+		            <button id="join_leave"><i class="fas fa-phone"></i>  Join</button>
+		            <!-- <button id="share_screen" disabled>Share screen</button>
+		            <button id="toggle_chat" disabled>Toggle chat</button> -->
 		        </form>
 		    </div>
         </div>
 
+        	
+        
+       
+        <!-- <form>
+            <label for="username">Name: </label>
+            <input type="text" name=”username” id="username">
+            <button id="join_leave">Join call</button>
+            <button id="share_screen" disabled>Share screen</button>
+            <button id="toggle_chat" disabled>Toggle chat</button>
+        </form> -->
         <div id ="recording">
 	        <label>Record video</label>
 	        <input id="record-input" type="text">
 	        <button id ="btnSubmit">Submit</button>
 
-	        <button id="btnStart">START RECORDING</button>
-	        <button id="btnStop">STOP RECORDING</button>
+	        <button id="btnStart"><i class="fa fa-play"></i></button>
+	        <button id="btnStop"><i class="fa fa-stop"></i></button>
 
 	        
-	        <button id="btnRec">RECOGNIZE</button>
-            <button id="btnGen">GENERATE</button>
+	        <button id="btnRec">Recognize</button>
     	</div>
-        <video id="vid2" style='display:none;' controls></video>
+        
+        <video id="vid2" class ="center"  controls></video>
+        <span id="cross" class="close">&times;</span>
         <!-- could save to canvas and do image manipulation and saving too -->
  
         <p id="count">Disconnected.</p>

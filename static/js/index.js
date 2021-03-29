@@ -4,8 +4,9 @@ const button = document.getElementById('join_leave');
 const btnSubmit = document.getElementById('btnSubmit');
 const btnRec = document.getElementById('btnRec');
 const btnGen = document.getElementById('btnGen');
-const shareScreen = document.getElementById('share_screen');
-const toggleChat = document.getElementById('toggle_chat');
+// const shareScreen = document.getElementById('share_screen');
+// const toggleChat = document.getElementById('toggle_chat');
+const cross = document.getElementById('cross');
 const container = document.getElementById('container');
 const count = document.getElementById('count');
 const chatScroll = document.getElementById('chat-scroll');
@@ -46,12 +47,12 @@ function connectButtonHandler(event) {
             link.rel = "stylesheet";
             link.href = "static/css/style.css"
             head.appendChild(link);
-            button.innerHTML = 'Leave call';
+            button.innerHTML = "<li class='fa fa-phone'></li> Leave";
             button.disabled = false;
-            shareScreen.disabled = false;
+            // shareScreen.disabled = false;
         }).catch(() => {
             alert('Connection failed. Is the backend running?');
-            button.innerHTML = 'Join call';
+            button.innerHTML = "<li class='fa fa-phone'></li> Join";
             button.disabled = false;
         });
     }
@@ -59,11 +60,11 @@ function connectButtonHandler(event) {
         disconnect();
         document.styleSheets[0].disabled = false;
         var elements = document.querySelectorAll('link[rel=stylesheet]');
-        elements[2].parentNode.removeChild(elements[2]);
-        button.innerHTML = 'Join call';
+        elements[3].parentNode.removeChild(elements[3]);
+        button.innerHTML = "<li class='fa fa-phone'></li> Join";
         connected = false;
-        shareScreen.innerHTML = 'Share screen';
-        shareScreen.disabled = true;
+        // shareScreen.innerHTML = 'Share screen';
+        // shareScreen.disabled = true;
     }
 };
 
@@ -161,30 +162,30 @@ function disconnect() {
     if (root.classList.contains('withChat')) {
         root.classList.remove('withChat');
     }
-    toggleChat.disabled = true;
+    // toggleChat.disabled = true;
     connected = false;
     updateParticipantCount();
 };
 
-function shareScreenHandler() {
-    event.preventDefault();
-    if (!screenTrack) {
-        navigator.mediaDevices.getDisplayMedia().then(stream => {
-            screenTrack = new Twilio.Video.LocalVideoTrack(stream.getTracks()[0]);
-            room.localParticipant.publishTrack(screenTrack);
-            screenTrack.mediaStreamTrack.onended = () => { shareScreenHandler() };
-            shareScreen.innerHTML = 'Stop sharing';
-        }).catch(() => {
-            alert('Could not share the screen.')
-        });
-    }
-    else {
-        room.localParticipant.unpublishTrack(screenTrack);
-        screenTrack.stop();
-        screenTrack = null;
-        shareScreen.innerHTML = 'Share screen';
-    }
-};
+// function shareScreenHandler() {
+//     event.preventDefault();
+//     if (!screenTrack) {
+//         navigator.mediaDevices.getDisplayMedia().then(stream => {
+//             screenTrack = new Twilio.Video.LocalVideoTrack(stream.getTracks()[0]);
+//             room.localParticipant.publishTrack(screenTrack);
+//             screenTrack.mediaStreamTrack.onended = () => { shareScreenHandler() };
+//             shareScreen.innerHTML = 'Stop sharing';
+//         }).catch(() => {
+//             alert('Could not share the screen.')
+//         });
+//     }
+//     else {
+//         room.localParticipant.unpublishTrack(screenTrack);
+//         screenTrack.stop();
+//         screenTrack = null;
+//         shareScreen.innerHTML = 'Share screen';
+//     }
+// };
 
 function zoomTrack(trackElement) {
     if (!trackElement.classList.contains('trackZoomed')) {
@@ -236,7 +237,7 @@ function connectChat(token, conversationSid) {
                 for (let i = 0; i < messages.items.length; i++) {
                     addMessageToChat(messages.items[i].author, messages.items[i].body);
                 }
-                toggleChat.disabled = false;
+                // toggleChat.disabled = false;
             });
         });
     }).catch(e => {
@@ -249,16 +250,16 @@ function addMessageToChat(user, message) {
     chatScroll.scrollTop = chatScroll.scrollHeight;
 }
 
-function toggleChatHandler() {
-    event.preventDefault();
-    if (root.classList.contains('withChat')) {
-        root.classList.remove('withChat');
-    }
-    else {
-        root.classList.add('withChat');
-        chatScroll.scrollTop = chatScroll.scrollHeight;
-    }
-};
+// function toggleChatHandler() {
+//     event.preventDefault();
+//     if (root.classList.contains('withChat')) {
+//         root.classList.remove('withChat');
+//     }
+//     else {
+//         root.classList.add('withChat');
+//         chatScroll.scrollTop = chatScroll.scrollHeight;
+//     }
+// };
 
 function onChatInputKey(ev) {
     if (ev.keyCode == 13) {
@@ -345,12 +346,16 @@ function generation(){
         console.log(e);
     });
 };
-
+function close(){
+    document.getElementById("vid2").style.display = "none";
+    document.getElementById("cross").style.display = "none";
+};
 addLocalVideo();
 btnSubmit.addEventListener('click',submit);
+cross.addEventListener('click',close);
 btnRec.addEventListener('click',recognition);
 btnGen.addEventListener('click',generation);
 button.addEventListener('click', connectButtonHandler);
-shareScreen.addEventListener('click', shareScreenHandler);
-toggleChat.addEventListener('click', toggleChatHandler);
+// shareScreen.addEventListener('click', shareScreenHandler);
+// toggleChat.addEventListener('click', toggleChatHandler);
 chatInput.addEventListener('keyup', onChatInputKey);

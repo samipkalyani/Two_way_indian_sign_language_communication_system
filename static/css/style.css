@@ -1,5 +1,6 @@
 body{
 	background-image: url('bg.png');
+	margin: 0 10px;
 }
 
 h3{
@@ -8,6 +9,8 @@ h3{
 
 video{
 	width: 100%;
+	border-radius: 20px;
+	border: 2px solid;
 }
 
 #recording{
@@ -20,7 +23,7 @@ video{
 .login{
 	display: inline-block;
 	float: right;
-	margin-top: 32px;
+	margin-top: 10px;
 }
 #root{
 	display: block;
@@ -44,4 +47,44 @@ video{
 }
 .center{
 	background-color: whitesmoke;
+}
+#vid2{
+	display:none;
+	width: 30%;
+	margin: 10px auto;
+}
+button{
+	border-radius:10px;
+	border:1px solid;
+	background-color: white;
+}
+button:active{
+	border-radius:10px;
+}
+#btnStart:hover, #btnStart:active, #btnSubmit:hover, #btnSubmit:active, #btnRec:hover, #btnRec:active{
+	background-color: black;
+	color: white;
+}
+#btnStop, #join_leave{
+	background-color: white;
+	color: red;
+}
+#btnStop:hover, #btnStop:active, #join_leave:hover, #join_leave:active{
+	background-color: red;
+	color: white;
+}
+
+#count{
+	display:block;
+}
+
+#cross{
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    top: 110px;
+    right: 32%;
+    padding: 12px 16px;
+    opacity: 1;
+    transform: translate(0%, -50%);
 }
