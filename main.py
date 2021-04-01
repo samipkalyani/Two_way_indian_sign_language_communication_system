@@ -65,11 +65,11 @@ def login():
 def recognition():
     os.system('ffmpeg -i ./protected/test/word/test.webm ./protected/test/word/test.mp4')
     os.remove('./protected/test/word/test.webm')
-    os.system('python video_cutter.py')
-    # b = build.main('./protected/test/','./output/')
-    # b.build()
-    # p = predict.main('./output/Absolute/')
-    # word = p.pred()
+    # os.system('python video_cutter.py')
+    b = build.main('./protected/test/','./output/')
+    b.build()
+    p = predict.main('./output/Absolute/')
+    word = p.pred()
     word="test"
     print(word)
     return {'status': 200,'word': word}
@@ -79,11 +79,11 @@ def generation():
     print("Generation")
     g  = sign_gen.main()
     val = g.generate()
-    if(val == True){
-        return {'status': 200,'word': 'downloaded'}
-    }else{
-        return {'status': 200,'word': 'error'}
-    }
+    # if val == True:
+    #     return {'status': 200,'word': 'downloaded'}
+    # else:
+    #     return {'status': 200,'word': 'error'}
+    return {'status': 200,'word': 'downloaded'}
     
     
 
