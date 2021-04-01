@@ -30,10 +30,7 @@ video{
 #root{
 	display: block;
 }
-#chat{
-	display:none;
-}
-/*#chat-scroll{
+#chat-scroll{
 	margin-top: 10px;
 	position: relative;
 	overflow: hidden;
@@ -51,7 +48,7 @@ video{
 	width:100%;
 	margin-top: 5px;
 	height: 35px;
-}*/
+}
 .center{
 	background-color: whitesmoke;
 }
@@ -69,7 +66,7 @@ button{
 button:active{
 	border-radius:10px;
 }
-#btnStart:hover, #btnStart:active, #btnSubmit:hover, #btnSubmit:active, #btnRec:hover, #btnRec:active{
+#btnStart:hover, #btnStart:active, #btnSubmit:hover, #btnSubmit:active, #btnRec:hover, #btnRec:active, #btnGen:hover, #btnGen:active{
 	background-color: black;
 	border:1px solid;
 	color: white;
@@ -108,18 +105,13 @@ button:active{
 label{
 	font-size: 20px;
 }
-#join_leave_gen{
-	display: none;
-}
-#chat-input{
+#recording{
+	display:none;
+} 
+
+#gen-video{
 	display:none;
 }
-.vl{
-	border:1px solid;
-	position : absolute;
-	height: 350px;
-	margin: 0 -15px;
-}
-#generation{
+#join_leave_gen{
 	display:none;
 }

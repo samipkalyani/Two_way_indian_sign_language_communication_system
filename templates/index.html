@@ -32,6 +32,7 @@
 		            
 		            <input type="text" name=”username” id="username" placeholder="Name">
 		            <button id="join_leave"><i class="fas fa-phone"></i>  Join</button>
+                    <button id="join_leave_gen"><i class="fas fa-phone"></i>  Join</button>
 		            <!-- <button id="share_screen" disabled>Share screen</button>
 		            <button id="toggle_chat" disabled>Toggle chat</button> -->
 		        </form>
@@ -56,10 +57,12 @@
 	        <button id="btnStart"><i id="change" class="fa fa-play"></i></button>
 	        <button id="btnStop"><i class="fa fa-stop"></i></button>
 
-	        <button id="btnGen">Generate</button>
+	        
 	        <button id="btnRec">Recognize</button>
     	</div>
-        
+        <div id ="generation">
+            <button id="btnGen"> Generation </button>
+        </div>
         <video id="vid2" class ="center"  controls></video>
         <span id="cross" class="close">&times;</span>
         <!-- could save to canvas and do image manipulation and saving too -->
@@ -67,12 +70,12 @@
         <p id="count">Disconnected.</p>
         <div class="container-fluid">
 	        <div id="root" class="row">
-	            <div  class="col-sm-9">
+	            <div  class="col-sm-8">
                     <div id="container" class="row">
 	                   <div id="local" class="participant col-sm-6"><div></div><div class="label">Me</div></div>
                     </div>
 	            </div>
-                <div class="col-sm-3">
+                <div class="col-sm-4">
     	            <div id="chat" >
     	                <div id="chat-scroll">
     	                    <div id="chat-content">
@@ -81,6 +84,11 @@
     	                
     	            </div>
                     <input id="chat-input" type="text" placeholder="Add message here...">
+                    <div id="gen-video">
+                        <div class="vl"></div>
+                        <video controls></video>
+                    </div>
+                    
                 </div>
 	        </div>
     	</div>

@@ -4,6 +4,7 @@ const button = document.getElementById('join_leave');
 const btnSubmit = document.getElementById('btnSubmit');
 const btnRec = document.getElementById('btnRec');
 const btnGen = document.getElementById('btnGen');
+const button_gen = document.getElementById('join_leave_gen');
 // const shareScreen = document.getElementById('share_screen');
 // const toggleChat = document.getElementById('toggle_chat');
 const cross = document.getElementById('cross');
@@ -29,7 +30,7 @@ function addLocalVideo() {
     });
 };
 
-function connectButtonHandler(event) {
+function connectButtonHandler() {
     event.preventDefault();
     if (!connected) {
         let username = usernameInput.value;
@@ -37,16 +38,32 @@ function connectButtonHandler(event) {
             alert('Enter your name before connecting');
             return;
         }
-        button.disabled = true;
-        button.innerHTML = 'Connecting...';
+        if (window.value == 1){ 
+            button.disabled = true; 
+            button.innerHTML = 'Connecting...'; 
+        }   
+        else{   
+            button_gen.disabled = true; 
+            button_gen.innerHTML = 'Connecting...'; 
+        }
         connect(username).then(() => {
             document.styleSheets[0].disabled = true;
             var head = document.head;
-            var link = document.createElement("link");
-            link.type = "text/css";
-            link.rel = "stylesheet";
-            link.href = "static/css/style.css"
-            head.appendChild(link);
+            if (window.value == 1){
+                var link = document.createElement("link");
+                link.type = "text/css";
+                link.rel = "stylesheet";
+                link.href = "static/css/style.css";
+                head.appendChild(link);
+                
+            }
+            else{
+                var link = document.createElement("link");
+                link.type = "text/css";
+                link.rel = "stylesheet";
+                link.href = "static/css/style-gen.css";
+                head.appendChild(link);
+            }
             button.innerHTML = "<li class='fa fa-phone'></li> Leave";
             button.disabled = false;
             // shareScreen.disabled = false;
@@ -54,6 +71,8 @@ function connectButtonHandler(event) {
             alert('Connection failed. Is the backend running?');
             button.innerHTML = "<li class='fa fa-phone'></li> Join";
             button.disabled = false;
+            button_gen.innerHTML = "<li class='fa fa-phone'></li> Join";
+            button_gen.disabled = false;
         });
     }
     else {
@@ -62,7 +81,17 @@ function connectButtonHandler(event) {
         var elements = document.querySelectorAll('link[rel=stylesheet]');
         elements[3].parentNode.removeChild(elements[3]);
         button.innerHTML = "<li class='fa fa-phone'></li> Join";
+        
+        button.innerHTML = "<li class='fa fa-phone'></li> Join";
+        button_gen.innerHTML = "<li class='fa fa-phone'></li> Join";
+
         connected = false;
+        if (window.value == 1){
+            button_gen.disabled=false;
+        }
+        else{
+            button.disabled=false;
+        }
         // shareScreen.innerHTML = 'Share screen';
         // shareScreen.disabled = true;
     }
@@ -106,7 +135,7 @@ function updateParticipantCount() {
 function participantConnected(participant) {
     let participantDiv = document.createElement('div');
     participantDiv.setAttribute('id',participant.identity);
-    participantDiv.setAttribute('class', 'participant  col-sm-6');
+    participantDiv.setAttribute('class', 'participant col-sm-6');
 
     let tracksDiv = document.createElement('div');
     participantDiv.appendChild(tracksDiv);
@@ -354,12 +383,24 @@ function close(){
     document.getElementById("vid2").style.display = "none";
     document.getElementById("cross").style.display = "none";
 };
+function connectrec(){
+    window.value = 1;
+    button_gen.disabled=true;
+    connectButtonHandler();
+};
+function connectgen(){
+    window.value = 0;
+    button.disabled=true;
+    connectButtonHandler();
+};
+
 addLocalVideo();
 btnSubmit.addEventListener('click',submit);
 cross.addEventListener('click',close);
 btnRec.addEventListener('click',recognition);
 btnGen.addEventListener('click',generation);
-button.addEventListener('click', connectButtonHandler);
+button.addEventListener('click', connectrec);
+button_gen.addEventListener('click', connectgen);
 // shareScreen.addEventListener('click', shareScreenHandler);
 // toggleChat.addEventListener('click', toggleChatHandler);
 chatInput.addEventListener('keyup', onChatInputKey);
