@@ -358,7 +358,7 @@ addLocalVideo();
 btnSubmit.addEventListener('click',submit);
 cross.addEventListener('click',close);
 btnRec.addEventListener('click',recognition);
-// btnGen.addEventListener('click',generation);
+btnGen.addEventListener('click',generation);
 button.addEventListener('click', connectButtonHandler);
 // shareScreen.addEventListener('click', shareScreenHandler);
 // toggleChat.addEventListener('click', toggleChatHandler);

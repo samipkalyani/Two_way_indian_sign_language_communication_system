@@ -8,6 +8,7 @@ from twilio.base.exceptions import TwilioRestException
 import build
 import predict
 # import generator_preprocessor
+import sign_gen
 import ffmpeg
 login=True
 
@@ -64,22 +65,26 @@ def login():
 def recognition():
     os.system('ffmpeg -i ./protected/test/word/test.webm ./protected/test/word/test.mp4')
     os.remove('./protected/test/word/test.webm')
-    b = build.main('./protected/test/','./output/')
-    b.build()
-    p = predict.main('./output/Absolute/')
-    word = p.pred()
+    os.system('python video_cutter.py')
+    # b = build.main('./protected/test/','./output/')
+    # b.build()
+    # p = predict.main('./output/Absolute/')
+    # word = p.pred()
     word="test"
     print(word)
     return {'status': 200,'word': word}
 
 @app.route('/generation',methods=['GET'])
 def generation():
-    # print("Generation")
-    # pre = generator_preprocessor.main('./protected/test/videos')
-    # pre.preprocess()
-    word="test"
-    print(word)
-    return {'status': 200,'word': word}
+    print("Generation")
+    g  = sign_gen.main()
+    val = g.generate()
+    if(val == True){
+        return {'status': 200,'word': 'downloaded'}
+    }else{
+        return {'status': 200,'word': 'error'}
+    }
+    
     
 
 if __name__ == '__main__':

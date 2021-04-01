@@ -35,18 +35,18 @@ class Builder:
                 os.mkdir(self.output_data_path+"Absolute/"+word)
 
             with open("output.log", "a") as output:
-                subprocess.run("docker run -itd -e DISPLAY=$DISPLAY --name modified_mediapipe modified_mediapipe", shell=True, stdout=output, stderr=output)
-                subprocess.run("docker cp ./protected/test modified_mediapipe:/mediapipe", shell=True, stdout=output, stderr=output)
-                subprocess.run("docker cp ./output/ modified_mediapipe:/mediapipe", shell=True, stdout=output, stderr=output)
+                subprocess.call("docker run -itd -e DISPLAY=$DISPLAY --name modified_mediapipe modified_mediapipe", shell=True, stdout=output, stderr=output)
+                subprocess.call("docker cp ./protected/test modified_mediapipe:/mediapipe", shell=True, stdout=output, stderr=output)
+                subprocess.call("docker cp ./output/ modified_mediapipe:/mediapipe", shell=True, stdout=output, stderr=output)
                 
             shutil.rmtree('./output')
 
             with open("output.log", "a") as output:
-                subprocess.run("docker cp script.py  modified_mediapipe:/mediapipe", shell=True, stdout=output, stderr=output)
-                subprocess.run("docker exec -itd modified_mediapipe python script.py", shell=True, stdout=output, stderr=output, timeout=None)
+                subprocess.call("docker cp script.py  modified_mediapipe:/mediapipe", shell=True, stdout=output, stderr=output)
+                subprocess.call("docker exec -it modified_mediapipe python script.py", shell=True, stdout=output, stderr=output)
 
             with open("output.log", "a") as output:
-                subprocess.run("docker cp modified_mediapipe:/mediapipe/output .", shell=True, stdout=output, stderr=output,timeout=None)
+                subprocess.call("docker cp modified_mediapipe:/mediapipe/output .", shell=True, stdout=output, stderr=output)
             
             with open("output.log", "a") as output:
                 subprocess.call("docker container stop modified_mediapipe", shell=True, stdout=output, stderr=output)
