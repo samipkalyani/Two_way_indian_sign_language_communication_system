@@ -3,7 +3,6 @@ const usernameInput = document.getElementById('username');
 const button = document.getElementById('join_leave');
 const btnSubmit = document.getElementById('btnSubmit');
 const btnRec = document.getElementById('btnRec');
-const btnGen = document.getElementById('btnGen');
 const button_gen = document.getElementById('join_leave_gen');
 // const shareScreen = document.getElementById('share_screen');
 // const toggleChat = document.getElementById('toggle_chat');
@@ -260,10 +259,12 @@ function connectChat(token, conversationSid) {
             conv = _conv;
             conv.on('messageAdded', (message) => {
                 addMessageToChat(message.author, message.body);
+                generation(message.body);
             });
             return conv.getMessages().then((messages) => {
                 chatContent.innerHTML = '';
                 for (let i = 0; i < messages.items.length; i++) {
+                    // console.log(message.items[i].body)
                     addMessageToChat(messages.items[i].author, messages.items[i].body);
                 }
                 // toggleChat.disabled = false;
@@ -369,7 +370,8 @@ function recognition(){
     });
 };
 
-function generation(){
+function generation(sentence){
+    console.log(sentence)
     fetch('/generation', {
         method: 'GET',
     }).then(res => res.json()).then(_data => {
@@ -398,7 +400,6 @@ addLocalVideo();
 btnSubmit.addEventListener('click',submit);
 cross.addEventListener('click',close);
 btnRec.addEventListener('click',recognition);
-btnGen.addEventListener('click',generation);
 button.addEventListener('click', connectrec);
 button_gen.addEventListener('click', connectgen);
 // shareScreen.addEventListener('click', shareScreenHandler);
