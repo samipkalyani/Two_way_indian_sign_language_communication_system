@@ -4,8 +4,7 @@ import sys
 import argparse
 from nltk.parse.stanford import StanfordParser
 from nltk.tree import *
-from textblob import TextBlob
-from textblob import Word
+from nltk.stem import WordNetLemmatizer
 import nltk
 
 class Parser():
@@ -54,19 +53,29 @@ class Parser():
         words=parsed_sent
         stop_words = {'mustn', 'most', 'weren', 'will', 'll', 'did', "don't", 'the', 'is', 'hasn', 'mightn', 'own', 'doesn', 'wasn', 'other', 'aren', "you'll", 'o', 'should', "didn't", 'theirs', "aren't", 'an', 'was', "shouldn't", "hasn't", "doesn't", "wasn't", "you're", "hadn't", 'doing', "you'd", 'does', 'but', 'both', 'not', 'only', 'don', "couldn't", 'whom', 'haven', 'isn', 'be', 'm', 'y', 'ma', "won't", 'once', "mustn't", 'shan', "you've", 'too', 'because', 'against', 've', "isn't", 'd', 's', 'didn', "it's", "wouldn't", 'nor', 're', 'just', 'such', "should've", 'if', 'needn', 't', 'have', 'off', 'or', 'won', "needn't", 'hadn', 'further', 'shouldn', 'each', 'are', 'had', 'no', 'couldn', "that'll", 'as', 'having', 'while', 'than', "mightn't", 'wouldn', 'a', "haven't", "shan't", "she's", 'into', "weren't", 'very', 'were', 'am', 'and', 'being', 'so', 'has', 'yours', 'for', 'yourselves', 'by', 'ours' , 'been', 'ain'}
         lemmatized_words=[]
-        for w in words:
-            if w not in stop_words:
-                t = Word(w)
-                blob_object = TextBlob(w)
-                if blob_object.tags[0][1][0] == 'V':
-                        lemmatized_words.append(t.lemmatize('v'))
-                else:
-                        lemmatized_words.append(t.lemmatize())
 
+        def get_wordnet_pos(treebank_tag):
+            if treebank_tag.startswith('J'):
+                return 'a'
+            elif treebank_tag.startswith('V'):
+                return 'v'
+                
+            elif treebank_tag.startswith('R'):
+                return 'r'
+            else:
+                return 'n'
+
+        lemmatizer = WordNetLemmatizer()
+
+        tag = nltk.pos_tag(words)
+        for i in tag:
+            if i[0] not in stop_words:
+                lemmatized_words.append(lemmatizer.lemmatize(i[0], pos = get_wordnet_pos(i[1])))
+        
         islsentence = []
         for w in lemmatized_words:
             if w not in stop_words:
-                islsentence.append(w)
+                islsentence.append(w.lower())
         return islsentence
 
 def main(sentence):

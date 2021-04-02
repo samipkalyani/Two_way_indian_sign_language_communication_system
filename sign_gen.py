@@ -7,6 +7,7 @@ import time
 from IPython import display
 import numpy as np
 import os
+from os.path import isfile, join
 
 class SignGenerator:
   def __init__(self,islsentence):
@@ -164,11 +165,13 @@ class SignGenerator:
 
     return tf.keras.Model(inputs=[inp, tar], outputs=last)
 
-def generate_images(model, test_input, tar,f):
-  prediction = model(test_input, training=True)
-  display_list = [test_input[0], prediction[0]]
-  title = ['Input Image', 'Predicted Image']
-  plt.savefig('frames_gen1/'+str(f)+'.png')
+  def generate_images(self, model, test_input, tar,f):
+    prediction = model(test_input, training=True)
+    display_list = [test_input[0], prediction[0]]
+    title = ['Input Image', 'Predicted Image']
+    plt.axis('off')
+    plt.imshow(display_list[1] * 0.5 + 0.5)
+    plt.savefig('frames-gen/'+str(f)+'.png')
 
   def generate(self):
     test_dataset = tf.data.Dataset.list_files('./test-folder/*.jpg', shuffle=False, seed = 1)
@@ -180,21 +183,47 @@ def generate_images(model, test_input, tar,f):
     discriminator = self.Discriminator()
     generator_optimizer = tf.keras.optimizers.Adam(2e-4, beta_1=0.5)
     discriminator_optimizer = tf.keras.optimizers.Adam(2e-4, beta_1=0.5)
-    checkpoint_dir = '/'
-    checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt-samip")
+    checkpoint_dir = './gan-model'
+    checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt-samip200")
     checkpoint = tf.train.Checkpoint(generator_optimizer=generator_optimizer,
                                  discriminator_optimizer=discriminator_optimizer,
                                  generator=generator,
                                  discriminator=discriminator)
 
-    checkpoint.restore(tf.train.latest_checkpoint('ckpts/'))
+    checkpoint.restore(tf.train.latest_checkpoint('./gan-model/'))
     f=1
     for inp, tar in test_dataset.take(len(os.listdir('./test-folder/'))):
-      generate_images(generator, inp, tar,f)
+      self.generate_images(generator, inp, tar,f)
       f+=1
+    pathIn= './frames-gen/'
+    pathOut = 'video.mp4'
+    fps = 24
+    frames_array = []
+    files=[]
+    fs = [f for f in os.listdir(pathIn)]
+    for f in fs:
+      new_f = f.split('.')[0]
+      files.append(new_f)
+    files.sort(key=int)
+    for file in files:
+      file += '.png'
+      frames_array.append(file)
+    print(frames_array)
+    m=[]
+    for i in range(len(frames_array)):
+        filename=pathIn + frames_array[i]
+        img = cv2.imread(filename)
+        height, width, layers = img.shape
+        size = (width,height)
+        #inserting the frames into an image array
+        m.append(img)
+    #print(frame_array)
+    out = cv2.VideoWriter(pathOut,cv2.VideoWriter_fourcc(*'DIVX'), fps, size)
+    for i in range(len(m)):
+        # writing to a image array
+        out.write(m[i])
+    out.release()
     return True
-
-
 
 def main(islsentence):
   g = SignGenerator(islsentence)

@@ -77,18 +77,17 @@ def recognition():
 
 @app.route('/generation',methods=['POST'])
 def generation():
-    print("Generation")
-    sentence = request.get_json(force=True).get('sentence')
-    p = text_parser.main(sentence)
-    islsentence = p.parse()
-    print(islsentence)
-    g  = sign_gen.main(islsentence)
-    val = g.generate()
+    # sentence = request.get_json(force=True).get('sentence')
+    # p = text_parser.main(sentence)
+    # islsentence = p.parse()
+    # print(islsentence)
+    # g  = sign_gen.main(islsentence)
+    # val = g.generate()
     # if val == True:
     #     return {'status': 200,'word': 'downloaded'}
     # else:
     #     return {'status': 200,'word': 'error'}
-    return {'status': 200,'word': 'downloaded'}
+    return {'status': 200,'path':'./video.mp4'}
     
     
 
