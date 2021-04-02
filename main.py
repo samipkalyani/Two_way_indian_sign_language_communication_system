@@ -79,12 +79,11 @@ def recognition():
 def generation():
     print("Generation")
     sentence = request.get_json(force=True).get('sentence')
-    print(sentence)
     p = text_parser.main(sentence)
     islsentence = p.parse()
     print(islsentence)
-    # g  = sign_gen.main()
-    # val = g.generate()
+    g  = sign_gen.main(islsentence)
+    val = g.generate()
     # if val == True:
     #     return {'status': 200,'word': 'downloaded'}
     # else:

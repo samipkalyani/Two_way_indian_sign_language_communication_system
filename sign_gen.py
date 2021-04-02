@@ -9,7 +9,8 @@ import numpy as np
 import os
 
 class SignGenerator:
-  def __init__(self):
+  def __init__(self,islsentence):
+    self.islsentence = islsentence    
     self.BUFFER_SIZE = 400
     self.BATCH_SIZE = 1
     self.IMG_WIDTH = 512
@@ -195,6 +196,6 @@ def generate_images(model, test_input, tar,f):
 
 
 
-def main():
-  g = SignGenerator()
+def main(islsentence):
+  g = SignGenerator(islsentence)
   return g
