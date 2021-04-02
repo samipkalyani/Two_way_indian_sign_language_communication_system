@@ -6,6 +6,7 @@ mp_hands = mp.solutions.hands
 # cap = cv2.VideoCapture(0)
 cap = cv2.VideoCapture('./protected/test/word/test.mp4')
 down = []
+down_arr = []
 
 flag = 0
 
@@ -14,7 +15,7 @@ frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
 total_duration = frame_count / fps
 print(total_duration)
 
-with mp_hands.Hands(min_detection_confidence=0.8,min_tracking_confidence=0.5) as hands:
+with mp_hands.Hands(min_detection_confidence=0.75,min_tracking_confidence=0.5) as hands:
     while cap.isOpened():
         success, image = cap.read()
         if not success:
@@ -36,23 +37,29 @@ with mp_hands.Hands(min_detection_confidence=0.8,min_tracking_confidence=0.5) as
         image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         if results.multi_hand_landmarks:
             if flag==1:
+                if len(down_arr)>= 10:
+                    down.append(sum(down_arr)/len(down_arr)) 
                 flag=0
             # for hand_landmarks in results.multi_hand_landmarks:
             #     mp_drawing.draw_landmarks(image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
-        else:
+        else:  
             if flag==0:
-                print("no hands")
+                down_arr=[] 
                 frame_number = int(cap.get(cv2.CAP_PROP_POS_FRAMES))
                 duration = frame_number / fps
-                down.append(duration)
+                down_arr.append(duration)
                 flag=1
+            else:
+                frame_number = int(cap.get(cv2.CAP_PROP_POS_FRAMES))
+                duration = frame_number / fps
+                down_arr.append(duration)
             # cv2.imshow('MediaPipe Hands', image)
     # if cv2.waitKey(5) & 0xFF == 27:
     #   break
+    if len(down_arr)>= 10:
+        down.append(sum(down_arr)/len(down_arr)) 
 cap.release()
 print("down: ")
-print(down)
-down[0] = 0
 print(down)
 
 
