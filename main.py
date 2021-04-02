@@ -74,9 +74,11 @@ def recognition():
     print(word)
     return {'status': 200,'word': word}
 
-@app.route('/generation',methods=['GET'])
+@app.route('/generation',methods=['POST'])
 def generation():
     print("Generation")
+    sentence = request.get_json(force=True).get('sentence')
+    print(sentence)
     g  = sign_gen.main()
     val = g.generate()
     # if val == True:

@@ -259,7 +259,6 @@ function connectChat(token, conversationSid) {
             conv = _conv;
             conv.on('messageAdded', (message) => {
                 addMessageToChat(message.author, message.body);
-                generation(message.body);
             });
             return conv.getMessages().then((messages) => {
                 chatContent.innerHTML = '';
@@ -294,6 +293,7 @@ function addMessageToChat(user, message) {
 function onChatInputKey(ev) {
     if (ev.keyCode == 13) {
         conv.sendMessage(chatInput.value);
+        generation(chatInput.value);
         chatInput.value = '';
     }
 };
@@ -373,7 +373,8 @@ function recognition(){
 function generation(sentence){
     console.log(sentence)
     fetch('/generation', {
-        method: 'GET',
+        method: 'POST',
+        body: JSON.stringify({"sentence": sentence})
     }).then(res => res.json()).then(_data => {
         data = _data;
         console.log(data)
