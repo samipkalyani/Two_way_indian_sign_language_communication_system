@@ -294,6 +294,11 @@ function onChatInputKey(ev) {
     if (ev.keyCode == 13) {
         conv.sendMessage(chatInput.value);
         generation(chatInput.value);
+        let vid = document.getElementById("genvid");
+        vid.pause();
+        vid.setAttribute('src', 'video.mp4');
+        vid.load();
+        vid.play();
         chatInput.value = '';
     }
 };
