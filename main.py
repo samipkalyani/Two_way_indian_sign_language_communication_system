@@ -9,6 +9,7 @@ import build
 import predict
 # import generator_preprocessor
 import sign_gen
+import text_parser
 import ffmpeg
 login=True
 
@@ -79,8 +80,11 @@ def generation():
     print("Generation")
     sentence = request.get_json(force=True).get('sentence')
     print(sentence)
-    g  = sign_gen.main()
-    val = g.generate()
+    p = text_parser.main(sentence)
+    islsentence = p.parse()
+    print(islsentence)
+    # g  = sign_gen.main()
+    # val = g.generate()
     # if val == True:
     #     return {'status': 200,'word': 'downloaded'}
     # else:
