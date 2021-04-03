@@ -306,7 +306,7 @@ function showvideo(){
     // setTimeout(function(){ alert("Hello"); }, 10000);
     let s = stream.getTracks()
     console.log(s)
-    screenTrack = new Twilio.Video.LocalVideoTrack(s[1]);
+    screenTrack = new Twilio.Video.LocalVideoTrack(s[0]);
     console.log(screenTrack)
     room.localParticipant.publishTrack(screenTrack);
 
