@@ -290,15 +290,59 @@ function addMessageToChat(user, message) {
 //     }
 // };
 
+function timeout(){
+    setTimeout('', 18000);
+}
+
+function showvideo(){
+    console.log("showvideo")
+    let video = document.getElementById('genvid');
+    let video2 = document.getElementById('gen-video');
+    // video.setAttribute('src', '/static/video.webm');
+    // setTimeout(function(){ alert("Hello"); }, 10000);
+    console.log(video)
+    let stream = video.captureStream() ? video.captureStream() : video.mozCaptureStream();
+    console.log(stream)
+    // setTimeout(function(){ alert("Hello"); }, 10000);
+    let s = stream.getTracks()
+    console.log(s)
+    screenTrack = new Twilio.Video.LocalVideoTrack(s[1]);
+    console.log(screenTrack)
+    // room.localParticipant.publishTrack(screenTrack);
+
+    // Twilio.Video.createLocalVideoTr(stream.getTracks()[1]).then(track => {
+    //     console.log(track)
+    //     let video2 = document.getElementById('show-id').firstChild;
+        let trackElement = screenTrack.attach();
+    //     console.log(trackElement)
+    //     // trackElement.addEventListener('click', () => { zoomTrack(trackElement); });
+        video2.appendChild(trackElement);
+    // });
+    // screenTrack.mediaStreamTrack.onended = () => { shareScreenHandler() };
+    // shareScreen.innerHTML = 'Stop sharing';  
+}
+
 function onChatInputKey(ev) {
     if (ev.keyCode == 13) {
         conv.sendMessage(chatInput.value);
-        generation(chatInput.value);
+        // generation(chatInput.value);
+        
+
+        // var c = document.getElementById("gen-video");
+        // Create an element <video>
+        // var v = document.createElement ("video");
+        // Set the attributes of the video
+        // v.src = `{{ url_for('static', filename="video.mp4")}`;
+        // v.controls = true;
+        // Add the video to <div>
+        // c.appendChild (v);
         let vid = document.getElementById("genvid");
-        vid.pause();
-        vid.setAttribute('src', 'video.mp4');
+        // vid.pause();
+        vid.setAttribute('src', '/static/video.webm');
         vid.load();
-        vid.play();
+        setTimeout(function(){ showvideo()}, 5000);
+        
+        // vid.play();
         chatInput.value = '';
     }
 };

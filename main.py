@@ -87,8 +87,12 @@ def generation():
     #     return {'status': 200,'word': 'downloaded'}
     # else:
     #     return {'status': 200,'word': 'error'}
-    return {'status': 200,'path':'./video.mp4'}
+    return {'status': 200,'path':'./video.webm'}
     
+@app.route('/static/<path:path>')
+def send_js(path):
+    console.log(path)
+    return send_from_directory('static', path)
     
 
 if __name__ == '__main__':

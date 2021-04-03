@@ -98,6 +98,9 @@ label{
 #chat-input{
 	display:none;
 }
+#genvid{
+	display:none;
+}
 .vl{
 	border:1px solid;
 	position : absolute;
