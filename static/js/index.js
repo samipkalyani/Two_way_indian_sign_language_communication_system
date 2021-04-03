@@ -297,7 +297,7 @@ function timeout(){
 function showvideo(){
     console.log("showvideo")
     let video = document.getElementById('genvid');
-    let video2 = document.getElementById('gen-video');
+    // let video2 = document.getElementById('gen-video');
     // video.setAttribute('src', '/static/video.webm');
     // setTimeout(function(){ alert("Hello"); }, 10000);
     console.log(video)
@@ -308,15 +308,15 @@ function showvideo(){
     console.log(s)
     screenTrack = new Twilio.Video.LocalVideoTrack(s[1]);
     console.log(screenTrack)
-    // room.localParticipant.publishTrack(screenTrack);
+    room.localParticipant.publishTrack(screenTrack);
 
     // Twilio.Video.createLocalVideoTr(stream.getTracks()[1]).then(track => {
     //     console.log(track)
     //     let video2 = document.getElementById('show-id').firstChild;
-        let trackElement = screenTrack.attach();
+        // let trackElement = screenTrack.attach();
     //     console.log(trackElement)
     //     // trackElement.addEventListener('click', () => { zoomTrack(trackElement); });
-        video2.appendChild(trackElement);
+        // video2.appendChild(trackElement);
     // });
     // screenTrack.mediaStreamTrack.onended = () => { shareScreenHandler() };
     // shareScreen.innerHTML = 'Stop sharing';  
