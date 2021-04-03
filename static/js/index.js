@@ -325,25 +325,25 @@ function showvideo(){
 function onChatInputKey(ev) {
     if (ev.keyCode == 13) {
         conv.sendMessage(chatInput.value);
-        // generation(chatInput.value);
-        
-
-        // var c = document.getElementById("gen-video");
-        // Create an element <video>
-        // var v = document.createElement ("video");
-        // Set the attributes of the video
-        // v.src = `{{ url_for('static', filename="video.mp4")}`;
-        // v.controls = true;
-        // Add the video to <div>
-        // c.appendChild (v);
-        let vid = document.getElementById("genvid");
-        // vid.pause();
-        vid.setAttribute('src', '/static/video.webm');
-        vid.load();
-        setTimeout(function(){ showvideo()}, 5000);
-        
-        // vid.play();
-        chatInput.value = '';
+        generation(chatInput.value).then(function(path){
+            console.log(path)
+            // var c = document.getElementById("gen-video");
+            // Create an element <video>
+            // var v = document.createElement ("video");
+            // Set the attributes of the video
+            // v.src = `{{ url_for('static', filename="video.mp4")}`;
+            // v.controls = true;
+            // Add the video to <div>
+            // c.appendChild (v);
+            let vid = document.getElementById("genvid");
+            // vid.pause();
+            vid.setAttribute('src', path);
+            vid.load();
+            setTimeout(function(){ showvideo()}, 5000);
+            
+            // vid.play();
+            chatInput.value = '';
+        })
     }
 };
 
@@ -421,15 +421,16 @@ function recognition(){
 
 function generation(sentence){
     console.log(sentence)
-    fetch('/generation', {
+    let path = fetch('/generation', {
         method: 'POST',
         body: JSON.stringify({"sentence": sentence})
     }).then(res => res.json()).then(_data => {
         data = _data;
-        console.log(data)
+        return data.path
     }).catch(e => {
         console.log(e);
     });
+    return path
 };
 function close(){
     document.getElementById("vid2").style.display = "none";
