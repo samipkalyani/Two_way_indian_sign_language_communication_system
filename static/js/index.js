@@ -3,6 +3,7 @@ const usernameInput = document.getElementById('username');
 const button = document.getElementById('join_leave');
 const btnSubmit = document.getElementById('btnSubmit');
 const btnRec = document.getElementById('btnRec');
+const stopVid = document.getElementById('stopVid')
 const button_gen = document.getElementById('join_leave_gen');
 // const shareScreen = document.getElementById('share_screen');
 // const toggleChat = document.getElementById('toggle_chat');
@@ -290,10 +291,6 @@ function addMessageToChat(user, message) {
 //     }
 // };
 
-function timeout(){
-    setTimeout('', 18000);
-}
-
 function showvideo(){
     console.log("showvideo")
     let video = document.getElementById('genvid');
@@ -447,11 +444,18 @@ function connectgen(){
     connectButtonHandler();
 };
 
+function stopVideo(){
+    room.localParticipant.unpublishTrack(screenTrack);
+    screenTrack.stop();
+    screenTrack = null;
+}
+
 addLocalVideo();
 btnSubmit.addEventListener('click',submit);
 cross.addEventListener('click',close);
 btnRec.addEventListener('click',recognition);
 button.addEventListener('click', connectrec);
+stopVid.addEventListener('click', stopVideo);
 button_gen.addEventListener('click', connectgen);
 // shareScreen.addEventListener('click', shareScreenHandler);
 // toggleChat.addEventListener('click', toggleChatHandler);

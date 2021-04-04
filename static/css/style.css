@@ -101,6 +101,9 @@ label{
 #genvid{
 	display:none;
 }
+#stopVid{
+	display:none;
+}
 .vl{
 	border:1px solid;
 	position : absolute;
