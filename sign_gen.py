@@ -172,6 +172,7 @@ class SignGenerator:
     plt.axis('off')
     plt.imshow(display_list[1] * 0.5 + 0.5)
     plt.savefig('frames-gen/'+str(f)+'.png')
+    plt.cla()
 
   def generate(self):
     test_dataset = tf.data.Dataset.list_files('./test-folder/*.jpg', shuffle=False, seed = 1)
@@ -196,7 +197,7 @@ class SignGenerator:
       self.generate_images(generator, inp, tar,f)
       f+=1
     pathIn= './frames-gen/'
-    pathOut = 'video.mp4'
+    pathOut = './static/video.mp4'
     fps = 24
     frames_array = []
     files=[]
