@@ -1,3 +1,5 @@
+import os
+import shutil
 import cv2
 import mediapipe as mp
 from datetime import datetime
@@ -61,6 +63,12 @@ with mp_hands.Hands(min_detection_confidence=0.75,min_tracking_confidence=0.5) a
 cap.release()
 print("down: ")
 print(down)
+
+for i in range(1, len(down)):
+    os.mkdir("./protected/test"+str(i))
+    os.mkdir("./protected/test"+str(i)+"/word"+str(i))
+    os.system("ffmpeg -t "+str(down[i])+" -i ./protected/test/word/test.mp4 -ss "+str(down[i-1])+" ./protected/test/word"+str(i)+"/word"+str(i)+".mp4")
+
 
 
 
