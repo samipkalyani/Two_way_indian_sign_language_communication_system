@@ -69,9 +69,9 @@ function connectButtonHandler() {
             // shareScreen.disabled = false;
         }).catch(() => {
             alert('Connection failed. Is the backend running?');
-            button.innerHTML = "<li class='fa fa-phone'></li> Join";
+            button.innerHTML = "<li class='fa fa-phone'></li> Specially Abled";
             button.disabled = false;
-            button_gen.innerHTML = "<li class='fa fa-phone'></li> Join";
+            button_gen.innerHTML = "<li class='fa fa-phone'></li> Abled";
             button_gen.disabled = false;
         });
     }
@@ -80,10 +80,10 @@ function connectButtonHandler() {
         document.styleSheets[0].disabled = false;
         var elements = document.querySelectorAll('link[rel=stylesheet]');
         elements[3].parentNode.removeChild(elements[3]);
-        button.innerHTML = "<li class='fa fa-phone'></li> Join";
+        // button.innerHTML = "<li class='fa fa-phone'></li> Join";
         
-        button.innerHTML = "<li class='fa fa-phone'></li> Join";
-        button_gen.innerHTML = "<li class='fa fa-phone'></li> Join";
+        button.innerHTML = "<li class='fa fa-phone'></li>Specially Abled";
+        button_gen.innerHTML = "<li class='fa fa-phone'></li> Abled";
 
         connected = false;
         if (window.value == 1){
@@ -324,6 +324,7 @@ function onChatInputKey(ev) {
         conv.sendMessage(chatInput.value);
         generation(chatInput.value).then(function(path){
             console.log(path)
+            chatInput.value = '';
             // var c = document.getElementById("gen-video");
             // Create an element <video>
             // var v = document.createElement ("video");
@@ -339,7 +340,7 @@ function onChatInputKey(ev) {
             setTimeout(function(){ showvideo()}, 5000);
             
             // vid.play();
-            chatInput.value = '';
+            
         })
     }
 };
@@ -417,17 +418,17 @@ function recognition(){
 };
 
 function generation(sentence){
-    console.log(sentence)
-    let path = fetch('/generation', {
-        method: 'POST',
-        body: JSON.stringify({"sentence": sentence})
-    }).then(res => res.json()).then(_data => {
-        data = _data;
-        return data.path
-    }).catch(e => {
-        console.log(e);
-    });
-    return path
+    // console.log(sentence)
+    // let path = fetch('/generation', {
+    //     method: 'POST',
+    //     body: JSON.stringify({"sentence": sentence})
+    // }).then(res => res.json()).then(_data => {
+    //     data = _data;
+    //     return data.path
+    // }).catch(e => {
+    //     console.log(e);
+    // });
+    // return path
 };
 function close(){
     document.getElementById("vid2").style.display = "none";
