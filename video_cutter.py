@@ -67,7 +67,7 @@ print(down)
 for i in range(1, len(down)):
     os.mkdir("./protected/test"+str(i))
     os.mkdir("./protected/test"+str(i)+"/word"+str(i))
-    os.system("ffmpeg -t "+str(down[i])+" -i ./protected/test/word/test.mp4 -ss "+str(down[i-1])+" ./protected/test/word"+str(i)+"/word"+str(i)+".mp4")
+    os.system("ffmpeg -t "+str(down[i])+" -i ./protected/test/word/test.mp4 -ss "+str(down[i-1])+" ./protected/test"+str(i)+"/word"+str(i)+"/word"+str(i)+".mp4")
 
 
 

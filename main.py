@@ -65,11 +65,12 @@ def login():
 
 @app.route('/recognition',methods=['POST'])
 def recognition():
-    os.system('ffmpeg -i ./protected/test/word/test.webm ./protected/test/word/test.mp4')
+    # os.system('ffmpeg -i ./protected/test/word/test.webm ./protected/test/word/test.mp4')
     # os.remove('./protected/test/word/test.webm')
-    os.system('python video_cutter.py')
-    # b = build.main('./protected/test/','./output/')
-    # b.build()
+    # os.system('python video_cutter.py')
+    # shutil.rmtree('./protected/test')
+    b = build.main('./protected/','./output/')
+    b.build()
     # p = predict.main('./output/Absolute/')
     # word = p.pred()
     word = "test"
