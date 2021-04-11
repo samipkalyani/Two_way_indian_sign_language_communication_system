@@ -74,7 +74,9 @@ button:active, button:focus{
 	margin-left: 15px;
 	font-size: 20px;
 }
-
+#gen-txt{
+	display: none;
+}
 #cross{
     display: none;
     cursor: pointer;
