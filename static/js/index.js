@@ -5,6 +5,7 @@ const btnSubmit = document.getElementById('btnSubmit');
 const btnRec = document.getElementById('btnRec');
 const stopVid = document.getElementById('stopVid')
 const button_gen = document.getElementById('join_leave_gen');
+const speechbutton = document.getElementById('s2t');
 // const shareScreen = document.getElementById('share_screen');
 // const toggleChat = document.getElementById('toggle_chat');
 const cross = document.getElementById('cross');
@@ -14,6 +15,11 @@ const chatScroll = document.getElementById('chat-scroll');
 const chatContent = document.getElementById('chat-content');
 const chatInput = document.getElementById('chat-input');
 const recordInput = document.getElementById('record-input');
+
+var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
+recognition.lang = 'en-US';
+recognition.interimResults = false;
+recognition.maxAlternatives = 5;
 
 let connected = false;
 let room;
@@ -451,7 +457,33 @@ function stopVideo(){
     screenTrack = null;
 }
 
+function startlistening(){
+    recognition.start();
+    recognition.onresult = function(event) {
+        console.log('You said: ', event.results[0][0].transcript);
+        generation(event.results[0][0].transcript).then(function(path){
+            console.log(path)
+            // var c = document.getElementById("gen-video");
+            // Create an element <video>
+            // var v = document.createElement ("video");
+            // Set the attributes of the video
+            // v.src = `{{ url_for('static', filename="video.mp4")}`;
+            // v.controls = true;
+            // Add the video to <div>
+            // c.appendChild (v);
+            let vid = document.getElementById("genvid");
+            // vid.pause();
+            vid.setAttribute('src', path);
+            vid.load();
+            setTimeout(function(){ showvideo()}, 5000);
+            
+            // vid.play();
+        })
+    }
+}
+
 addLocalVideo();
+speechbutton.addEventListener('click', startlistening);
 btnSubmit.addEventListener('click',submit);
 cross.addEventListener('click',close);
 btnRec.addEventListener('click',recognition);

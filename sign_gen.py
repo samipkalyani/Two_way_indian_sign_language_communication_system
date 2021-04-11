@@ -175,9 +175,6 @@ class SignGenerator:
     plt.cla()
 
   def generate(self):
-    test_dataset = tf.data.Dataset.list_files('./test-folder/*.jpg', shuffle=False, seed = 1)
-    test_dataset = test_dataset.map(self.load_image_test)
-    test_dataset = test_dataset.batch(self.BATCH_SIZE)
     generator = self.Generator()
     tf.keras.utils.plot_model(generator, show_shapes=True, dpi=64)
     generator.summary()
@@ -192,37 +189,64 @@ class SignGenerator:
                                  discriminator=discriminator)
 
     checkpoint.restore(tf.train.latest_checkpoint('./gan-model/'))
-    f=1
-    for inp, tar in test_dataset.take(len(os.listdir('./test-folder/'))):
-      self.generate_images(generator, inp, tar,f)
-      f+=1
-    pathIn= './frames-gen/'
+    for folder in self.islsentence:
+      if folder not in os.listdir('./all-frames-gen/'):
+        os.mkdir('./all-frames-gen/'+folder)
+        f=1
+        print(folder)
+        test_dataset = tf.data.Dataset.list_files('./resized-newtrain/'+folder+'/*.jpg', shuffle=False, seed = 1)
+        test_dataset = test_dataset.map(self.load_image_test)
+        test_dataset = test_dataset.batch(self.BATCH_SIZE)
+        for inp, tar in test_dataset.take(len(os.listdir('./all-frames-gen/'))):
+          self.generate_images(generator, inp, tar,f)
+          f+=1
+    
+    # pathIn= './frames-gen/'
+    # pathOut = './static/video.mp4'
+    # fps = 24
+    # frames_array = []
+    # files=[]
+    # fs = [f for f in os.listdir(pathIn)]
+    # for f in fs:
+    #   new_f = f.split('.')[0]
+    #   files.append(new_f)
+    # files.sort(key=int)
+    # for file in files:
+    #   file += '.png'
+    #   frames_array.append(file)
+    # print(frames_array)
+    # m=[]
+    # for i in range(len(frames_array)):
+    #     filename=pathIn + frames_array[i]
+    #     img = cv2.imread(filename)
+    #     height, width, layers = img.shape
+    #     size = (width,height)
+    #     #inserting the frames into an image array
+    #     m.append(img)
+    # #print(frame_array)
+    # out = cv2.VideoWriter(pathOut,cv2.VideoWriter_fourcc(*'DIVX'), fps, size)
+    # for i in range(len(m)):
+    #     # writing to a image array
+    #     out.write(m[i])
+    # out.release()
+    m = []
+    fps = 10
     pathOut = './static/video.mp4'
-    fps = 24
-    frames_array = []
-    files=[]
-    fs = [f for f in os.listdir(pathIn)]
-    for f in fs:
-      new_f = f.split('.')[0]
-      files.append(new_f)
-    files.sort(key=int)
-    for file in files:
-      file += '.png'
-      frames_array.append(file)
-    print(frames_array)
-    m=[]
-    for i in range(len(frames_array)):
-        filename=pathIn + frames_array[i]
-        img = cv2.imread(filename)
-        height, width, layers = img.shape
+    for words in self.islsentence:
+      for frame in os.listdir('./all-frames-gen/'+words):
+        filename = './all-frames-gen/'+words+'/'+frame
+        image = cv2.imread(filename)
+        # print(image)
+        height, width, layers = image.shape
+        #print(height, width, layers)
         size = (width,height)
         #inserting the frames into an image array
-        m.append(img)
+        m.append(image)
     #print(frame_array)
     out = cv2.VideoWriter(pathOut,cv2.VideoWriter_fourcc(*'DIVX'), fps, size)
-    for i in range(len(m)):
+    for k in range(len(m)):
         # writing to a image array
-        out.write(m[i])
+        out.write(m[k])
     out.release()
     return True
 
