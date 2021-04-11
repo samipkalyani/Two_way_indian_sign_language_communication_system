@@ -13,3 +13,5 @@ script.py
 **/frames-gen
 video.mp4
 **/static/video.webm
+**/all-frames-gen/
+**/resized-newtrain/
