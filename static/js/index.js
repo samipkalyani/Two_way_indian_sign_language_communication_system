@@ -265,7 +265,15 @@ function connectChat(token, conversationSid) {
         return chat.getConversationBySid(conversationSid).then((_conv) => {
             conv = _conv;
             conv.on('messageAdded', (message) => {
-                addMessageToChat(message.author, message.body);
+                    console.log(message.body)
+                    var speech = new SpeechSynthesisUtterance();
+                    speech.lang = "en-US";
+                    speech.volume = 1;
+                    speech.rate = 1;
+                    speech.pitch = 1;
+                    speech.text = message.body;
+                    window.speechSynthesis.speak(speech);
+                    addMessageToChat(message.author, message.body);
             });
             return conv.getMessages().then((messages) => {
                 chatContent.innerHTML = '';
@@ -328,26 +336,6 @@ function showvideo(){
 function onChatInputKey(ev) {
     if (ev.keyCode == 13) {
         conv.sendMessage(chatInput.value);
-        generation(chatInput.value).then(function(path){
-            console.log(path)
-            chatInput.value = '';
-            // var c = document.getElementById("gen-video");
-            // Create an element <video>
-            // var v = document.createElement ("video");
-            // Set the attributes of the video
-            // v.src = `{{ url_for('static', filename="video.mp4")}`;
-            // v.controls = true;
-            // Add the video to <div>
-            // c.appendChild (v);
-            let vid = document.getElementById("genvid");
-            // vid.pause();
-            vid.setAttribute('src', path);
-            vid.load();
-            setTimeout(function(){ showvideo()}, 5000);
-            
-            // vid.play();
-            
-        })
     }
 };
 
@@ -411,7 +399,7 @@ function submit(){
 };
 
 
-function recognition(){
+function recognition2(){
     fetch('/recognition', {
         method: 'POST',
     }).then(res => res.json()).then(_data => {
@@ -424,17 +412,17 @@ function recognition(){
 };
 
 function generation(sentence){
-    // console.log(sentence)
-    // let path = fetch('/generation', {
-    //     method: 'POST',
-    //     body: JSON.stringify({"sentence": sentence})
-    // }).then(res => res.json()).then(_data => {
-    //     data = _data;
-    //     return data.path
-    // }).catch(e => {
-    //     console.log(e);
-    // });
-    // return path
+    console.log(sentence)
+    let path = fetch('/generation', {
+        method: 'POST',
+        body: JSON.stringify({"sentence": sentence})
+    }).then(res => res.json()).then(_data => {
+        data = _data;
+        return data.path
+    }).catch(e => {
+        console.log(e);
+    });
+    return path
 };
 function close(){
     document.getElementById("vid2").style.display = "none";
@@ -486,7 +474,7 @@ addLocalVideo();
 speechbutton.addEventListener('click', startlistening);
 btnSubmit.addEventListener('click',submit);
 cross.addEventListener('click',close);
-btnRec.addEventListener('click',recognition);
+btnRec.addEventListener('click',recognition2);
 button.addEventListener('click', connectrec);
 stopVid.addEventListener('click', stopVideo);
 button_gen.addEventListener('click', connectgen);
