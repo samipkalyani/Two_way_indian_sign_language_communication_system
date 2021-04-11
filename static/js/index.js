@@ -449,6 +449,7 @@ function startlistening(){
     recognition.start();
     recognition.onresult = function(event) {
         console.log('You said: ', event.results[0][0].transcript);
+        document.getElementById("text-display").value = event.results[0][0].transcript;
         generation(event.results[0][0].transcript).then(function(path){
             console.log(path)
             // var c = document.getElementById("gen-video");
