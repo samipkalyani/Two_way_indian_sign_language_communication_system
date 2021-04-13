@@ -36,18 +36,10 @@ video{
 	overflow: hidden;
 }
 #chat{
-	border: 1px solid;
-	border-radius: 10px;
-	overflow-y: scroll;
-	min-height: 358.317px;
-	max-height: 700px;
-	padding: 10px;
-	background-color: white;
+	display: none;
 }
 #chat-input{
-	width:100%;
-	margin-top: 5px;
-	height: 35px;
+	display: none;
 }
 .center{
 	background-color: whitesmoke;
@@ -73,15 +65,19 @@ button:active, button:focus{
 	border:1px solid;
 	color: white;
 }
-#btnStop, #join_leave{
+#btnStop, #join_leave, #s2t{
 	background-color: white;
 	border:1px solid red;
 	color: red;
 }
-#btnStop:hover, #btnStop:active, #join_leave:hover, #join_leave:active{
+#btnStop:hover, #btnStop:active, #join_leave:hover, #join_leave:active, #s2t:hover, #s2t:active{
 	background-color: red;
 	color: white;
 	border:1px solid red;
+}
+#s2t{
+	width: 40px;
+	height: 40px;
 }
 
 #count{
@@ -111,9 +107,9 @@ label{
 	display:none;
 } 
 
-/* #gen-video{
-	display:none;
-} */
+#gen-txt{
+	text-align: center;
+} 
 #join_leave_gen{
 	display:none;
 }

@@ -448,10 +448,12 @@ function stopVideo(){
 }
 
 function startlistening(){
+    document.getElementById('audio').className = "fa fa-microphone blink";
     recognition.start();
     recognition.onresult = function(event) {
         console.log('You said: ', event.results[0][0].transcript);
         document.getElementById("text-display").value = event.results[0][0].transcript;
+        document.getElementById('audio').className = "fa fa-microphone-slash";
         generation(event.results[0][0].transcript).then(function(path){
             console.log(path)
             // var c = document.getElementById("gen-video");
