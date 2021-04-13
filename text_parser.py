@@ -74,6 +74,8 @@ class Parser():
         
         islsentence = []
         for w in lemmatized_words:
+            if "'s" in w:
+                w = w.replace("'s","")
             if w not in stop_words:
                 islsentence.append(w.lower())
         return islsentence
