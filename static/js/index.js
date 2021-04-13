@@ -265,14 +265,16 @@ function connectChat(token, conversationSid) {
         return chat.getConversationBySid(conversationSid).then((_conv) => {
             conv = _conv;
             conv.on('messageAdded', (message) => {
-                    console.log(message.body)
-                    var speech = new SpeechSynthesisUtterance();
-                    speech.lang = "en-US";
-                    speech.volume = 1;
-                    speech.rate = 1;
-                    speech.pitch = 1;
-                    speech.text = message.body;
-                    window.speechSynthesis.speak(speech);
+                    if(window.value == 0){
+                        console.log(message.body)
+                        var speech = new SpeechSynthesisUtterance();
+                        speech.lang = "en-US";
+                        speech.volume = 1;
+                        speech.rate = 1;
+                        speech.pitch = 1;
+                        speech.text = message.body;
+                        window.speechSynthesis.speak(speech);
+                    }
                     addMessageToChat(message.author, message.body);
             });
             return conv.getMessages().then((messages) => {

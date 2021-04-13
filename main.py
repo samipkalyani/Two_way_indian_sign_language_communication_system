@@ -65,13 +65,14 @@ def login():
 
 @app.route('/recognition',methods=['POST'])
 def recognition():
-    os.system('ffmpeg -i ./protected/test/word/test.webm ./protected/test/word/test.mp4')
-    os.remove('./protected/test/word/test.webm')
-    # os.system('python video_cutter.py')
-    b = build.main('./protected/test/','./output/')
-    b.build()
-    p = predict.main('./output/Absolute/')
-    word = p.pred()
+    # os.system('ffmpeg -i ./protected/test/word/test.webm ./protected/test/word/test.mp4')
+    # os.remove('./protected/test/word/test.webm')
+    # # os.system('python video_cutter.py')
+    # b = build.main('./protected/test/','./output/')
+    # b.build()
+    # p = predict.main('./output/Absolute/')
+    # word = p.pred()
+    word = "we had dinner yesterday night"
     print(word)
     return {'status': 200,'word': word}
 
