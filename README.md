@@ -34,7 +34,7 @@ The system uses video representation of words in Indian Sign Language as listed 
 ```
 - Build the above Mediapipe folder using 🐳 docker given [here](https://google.github.io/mediapipe/getting_started/install.html#installing-using-docker).
 
-4. Make akk the mention folders and sub-folders to have the added folders in main repository as shown below.
+4. Make all the mention folders and sub-folders to have the added folders in main repository as shown below.
 ```shell
 BE_Project
 ├── all-frames-gen
