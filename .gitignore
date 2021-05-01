@@ -15,3 +15,5 @@ video.mp4
 **/static/video.webm
 **/all-frames-gen/
 **/resized-newtrain/
+model_conv.h5
+label_conv.txt

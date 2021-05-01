@@ -65,7 +65,7 @@ class Predicter:
         #prediction
     def load_label(self):
         listfile=[]
-        with open("label.txt",mode='r') as l:
+        with open("label_conv.txt",mode='r') as l:
             listfile=[i for i in l.read().split()]
         label = {}
         count = 1
@@ -110,7 +110,7 @@ class Predicter:
         # output_dir=output_data_path
         output_dir =self.output_data_path
         x_test,Y=self.load_data(output_dir)
-        new_model = tf.keras.models.load_model('model.h5')
+        new_model = tf.keras.models.load_model('model_conv.h5')
         #new_model.summary()
 
         labels=self.load_label()
@@ -124,8 +124,8 @@ class Predicter:
         rev_labels = dict(zip(list(labels.values()), list(labels.keys())))
         s=0
         # filel=np.array(filel)
-        shutil.rmtree('./output')
-        os.mkdir('./output')
+        # shutil.rmtree('./output')
+        # os.mkdir('./output')
         
         return rev_labels[predictions[0]]
 

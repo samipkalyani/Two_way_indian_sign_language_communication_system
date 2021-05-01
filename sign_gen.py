@@ -8,6 +8,7 @@ from IPython import display
 import numpy as np
 import os
 from os.path import isfile, join
+import re
 
 class SignGenerator:
   def __init__(self,islsentence):
@@ -229,11 +230,16 @@ class SignGenerator:
     #     # writing to a image array
     #     out.write(m[i])
     # out.release()
+    def sorted_alphanumeric(data):
+      convert = lambda text: int(text) if text.isdigit() else text.lower()
+      alphanum_key = lambda key: [ convert(c) for c in re.split('([0-9]+)', key) ]
+      return sorted(data, key=alphanum_key)
     m = []
     fps = 10
     pathOut = './static/video.mp4'
     for words in self.islsentence:
-      for frame in os.listdir('./all-frames-gen/'+words):
+      for frame in sorted_alphanumeric(os.listdir('./all-frames-gen/'+words)):
+        print(frame)
         filename = './all-frames-gen/'+words+'/'+frame
         image = cv2.imread(filename)
         # print(image)

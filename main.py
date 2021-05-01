@@ -12,6 +12,7 @@ import sign_gen
 import text_parser
 import ffmpeg
 import shutil
+import time
 login=True
 
 load_dotenv()
@@ -65,35 +66,35 @@ def login():
 
 @app.route('/recognition',methods=['POST'])
 def recognition():
-    # os.system('ffmpeg -i ./protected/test/word/test.webm ./protected/test/word/test.mp4')
-    # os.remove('./protected/test/word/test.webm')
-    # # os.system('python video_cutter.py')
-    # b = build.main('./protected/test/','./output/')
-    # b.build()
-    # p = predict.main('./output/Absolute/')
-    # word = p.pred()
-    word = "we had dinner yesterday night"
+    os.system('ffmpeg -i ./protected/test/word/test.webm ./protected/test/word/test.mp4')
+    os.remove('./protected/test/word/test.webm')
+    time.sleep(120)
+    b = build.main('./protected/test/','./output/')
+    b.build()
+    p = predict.main('./output/Absolute/')
+    word = p.pred()
     print(word)
     return {'status': 200,'word': word}
 
 @app.route('/generation',methods=['POST'])
 def generation():
-    # os.remove('./static/video.webm')
+    os.remove('./static/video.webm')
     shutil.rmtree('./frames-gen')
     os.mkdir('frames-gen')
     sentence = request.get_json(force=True).get('sentence')
     p = text_parser.main(sentence)
     islsentence = p.parse()
     print(islsentence)  
-    # g  = sign_gen.main(islsentence)
-    # val = g.generate()
-    # if val == True:
-    #     os.system('ffmpeg -i ./static/video.mp4 ./static/video.webm')
-    #     os.remove('./static/video.mp4')
-    #     return {'status': 200, 'path': '/static/video.webm'}
-    # else:
-    #     return {'status': 500}
-    return {'status': 200,'path':'/static/video.webm'}
+    g  = sign_gen.main(islsentence)
+    val = g.generate()
+    if val == True:
+        # os.remove('./static/video.webm')
+        os.system('ffmpeg -i ./static/video.mp4 ./static/video.webm')
+        os.remove('./static/video.mp4')
+        return {'status': 200, 'path': '/static/video.webm'}
+    else:
+        return {'status': 500}
+
     
 @app.route('/static/<path:path>')
 def send_js(path):
