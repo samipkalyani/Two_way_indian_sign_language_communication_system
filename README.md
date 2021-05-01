@@ -1,5 +1,11 @@
 <h1>Two-way Indian sign language communication system using general adversarial networks and recurrent neural networks.</h1>
 
+## Overview
+This project proposes an implementation of generation and recognition of Indian sign language using Computer Vision and Natural Language Preprocessing. The intended end result of this project is to develop a communication system between an normal user not knowing Indian sign language and a specially-abled user having speech impairments.
+
+## Dataset
+The system uses video representation of words in Indian Sign Language as listed in the ISL dictionary. It consists of 2988 words, each word has two instances. You can download complete [dataset](https://drive.google.com/drive/folders/1bnnpumQFlEXKyx1jS2Qq7-K_u5heJgQU?usp=sharing)
+
 ## Setup
 1. Install the dependencies mentioned in `requirements.txt` to run this project.
 2. **For Sign generation**
