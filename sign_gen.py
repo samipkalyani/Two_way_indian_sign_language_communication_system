@@ -182,14 +182,14 @@ class SignGenerator:
     discriminator = self.Discriminator()
     generator_optimizer = tf.keras.optimizers.Adam(2e-4, beta_1=0.5)
     discriminator_optimizer = tf.keras.optimizers.Adam(2e-4, beta_1=0.5)
-    checkpoint_dir = './gan-model'
+    checkpoint_dir = './checkpoints'
     checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt-samip200")
     checkpoint = tf.train.Checkpoint(generator_optimizer=generator_optimizer,
                                  discriminator_optimizer=discriminator_optimizer,
                                  generator=generator,
                                  discriminator=discriminator)
 
-    checkpoint.restore(tf.train.latest_checkpoint('./gan-model/'))
+    checkpoint.restore(tf.train.latest_checkpoint('./checkpoints/'))
     for folder in self.islsentence:
       if folder not in os.listdir('./all-frames-gen/'):
         os.mkdir('./all-frames-gen/'+folder)

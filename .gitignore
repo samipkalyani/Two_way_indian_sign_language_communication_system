@@ -8,7 +8,7 @@ model.h5
 predict_colab.py
 script.py
 **/test-folder
-**/gan-model
+**/checkpoints
 **/stanford-parser-4.0.0
 **/frames-gen
 video.mp4

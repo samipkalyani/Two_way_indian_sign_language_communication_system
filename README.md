@@ -6,12 +6,12 @@ This project proposes an implementation of generation and recognition of Indian 
 ## Dataset
 The system uses video representation of words in Indian Sign Language as listed in the ISL dictionary. It consists of 2988 words, each word has two instances. You can download complete [dataset](https://drive.google.com/drive/folders/1bnnpumQFlEXKyx1jS2Qq7-K_u5heJgQU?usp=sharing)
 
-## Setup
+## 🔨 Setup
 1. Install the dependencies mentioned in `requirements.txt` to run this project.
 2. **For Sign generation**
 - Build [Openpose](https://github.com/CMU-Perceptual-Computing-Lab/openpose#installation)
 - Download the Stanford parser folder from the [drive link](https://drive.google.com/drive/folders/1xxxyj90SUK_fqjo_S-DW-jfMoHBcjbre) and place it in the main project repository. It is used in `text-parser.py` to translate input  sentences to gloss sequences.
-- Download the pre-trained [checkpoint folder](https://drive.google.com/drive/folders/1MtvtGxfR93cT2yLNKRaD97l-Nlw-6wSh?usp=sharing), [all-frames-gen](https://drive.google.com/drive/folders/1c4sGre9983FCpBMOZpNPKZNY6Z5sqHvt?usp=sharing) folder to run the generation and save all these folders in the main project repository. If you want to train on your image then run the [colab file](https://colab.research.google.com/drive/1oqT2RrK9c5XfWw8_aQ8dHNbDD5W7iwCw?usp=sharing) to get a trained model
+- Download the pre-trained [checkpoints folder](https://drive.google.com/drive/folders/1MtvtGxfR93cT2yLNKRaD97l-Nlw-6wSh?usp=sharing), [all-frames-gen](https://drive.google.com/drive/folders/1c4sGre9983FCpBMOZpNPKZNY6Z5sqHvt?usp=sharing) folder to run the generation and save all these folders in the main project repository. If you want to train on your image then run the [colab file](https://colab.research.google.com/drive/1oqT2RrK9c5XfWw8_aQ8dHNbDD5W7iwCw?usp=sharing) to get a trained model
 3. **For Sign recognition**
 - Clone Medapipe
 ```shell
@@ -34,7 +34,7 @@ The system uses video representation of words in Indian Sign Language as listed 
 ```
 - Build the above Mediapipe folder using 🐳 docker given [here](https://google.github.io/mediapipe/getting_started/install.html#installing-using-docker).
 
-4. Make akk the mention folders and sub-folders to have the added folders in main repository as shown below.
+4. Make all the mentioned folders and sub-folders in main repository as shown below.
 ```shell
 BE_Project
 ├── all-frames-gen
@@ -55,8 +55,11 @@ BE_Project
 - Execute **_`python main.py`_** to start the server.
 - Navigate to `http://localhost:5000` on your web browser and connect as a `specially-abled user` from the system that started the server. Navigate again to `http://localhost:5000` using different machine on the same network and connect as a `normal1 user1. We also suggest you use ngrok to broadcast localhost on a temporary HTTPS URL.
 
-## Publications
+## 📜 Publications
 Please refer to our [sign generation paper](https://ieeexplore.ieee.org/abstract/document/9315979)
+
+## 📚 Resources
+Project presentation [Link](https://docs.google.com/presentation/d/1kPfs-LB7_TSqNajidqYC5YY4o5MnByzeInf4t7kbrhE/edit?usp=sharing)
 
 ## 👤Contributors
 **[Neel Vasani](https://github.com/neelvasani16999), [Pratik Autee](https://github.com/prtkx2), [Samip Kalyani](https://github.com/samipkalyani)**
