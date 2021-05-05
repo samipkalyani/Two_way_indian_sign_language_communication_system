@@ -66,9 +66,6 @@ def login():
 
 @app.route('/recognition',methods=['POST'])
 def recognition():
-    os.system('ffmpeg -i ./protected/test/word/test.webm ./protected/test/word/test.mp4')
-    os.remove('./protected/test/word/test.webm')
-    time.sleep(120)
     b = build.main('./protected/test/','./output/')
     b.build()
     p = predict.main('./output/Absolute/')
@@ -88,7 +85,6 @@ def generation():
     g  = sign_gen.main(islsentence)
     val = g.generate()
     if val == True:
-        # os.remove('./static/video.webm')
         os.system('ffmpeg -i ./static/video.mp4 ./static/video.webm')
         os.remove('./static/video.mp4')
         return {'status': 200, 'path': '/static/video.webm'}

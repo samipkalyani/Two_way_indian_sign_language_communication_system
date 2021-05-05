@@ -350,22 +350,27 @@ function startrec(participant_id){
         let stop = document.getElementById('btnStop');
         let vidSave = document.getElementById('vid2');
         var recordedChunks = [];
-        var options = { mimeType: "video/webm" };
+        // var options = { mimeType: "video/webm" };
+        var options = { mimeType: "video/webm;codecs=h264" };
         var mediaRecorder = new MediaRecorder(stream, options);
         var blob;
 
         function handleDataAvailable(event) {
             if (event.data.size > 0) {
                 recordedChunks.push(event.data);
+                // blob = new Blob(recordedChunks, {
+                //     type: "video/webm"
+                // });
                 blob = new Blob(recordedChunks, {
-                    type: "video/webm"
+                    type: "video/mp4"
                 });
                 var url = URL.createObjectURL(blob);
                 var a = document.createElement("a");
                 document.body.appendChild(a);
                 a.style = "display: none";
                 a.href = url;
-                a.download = "test.webm";
+                // a.download = "test.webm";
+                a.download = "test.mp4";
                 a.click();
                 window.URL.revokeObjectURL(url);
                 recordedChunks=[];

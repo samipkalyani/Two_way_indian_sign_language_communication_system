@@ -201,35 +201,7 @@ class SignGenerator:
         for inp, tar in test_dataset.take(len(os.listdir('./all-frames-gen/'))):
           self.generate_images(generator, inp, tar,f)
           f+=1
-    
-    # pathIn= './frames-gen/'
-    # pathOut = './static/video.mp4'
-    # fps = 24
-    # frames_array = []
-    # files=[]
-    # fs = [f for f in os.listdir(pathIn)]
-    # for f in fs:
-    #   new_f = f.split('.')[0]
-    #   files.append(new_f)
-    # files.sort(key=int)
-    # for file in files:
-    #   file += '.png'
-    #   frames_array.append(file)
-    # print(frames_array)
-    # m=[]
-    # for i in range(len(frames_array)):
-    #     filename=pathIn + frames_array[i]
-    #     img = cv2.imread(filename)
-    #     height, width, layers = img.shape
-    #     size = (width,height)
-    #     #inserting the frames into an image array
-    #     m.append(img)
-    # #print(frame_array)
-    # out = cv2.VideoWriter(pathOut,cv2.VideoWriter_fourcc(*'DIVX'), fps, size)
-    # for i in range(len(m)):
-    #     # writing to a image array
-    #     out.write(m[i])
-    # out.release()
+
     def sorted_alphanumeric(data):
       convert = lambda text: int(text) if text.isdigit() else text.lower()
       alphanum_key = lambda key: [ convert(c) for c in re.split('([0-9]+)', key) ]

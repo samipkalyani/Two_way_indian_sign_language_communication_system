@@ -45,14 +45,14 @@ class Predicter:
                     numbers = [float(num) for num in t.read().split()]
                     #print(len(numbers[0]))
                     for i in range(len(numbers),25200):
-                        numbers.extend([0.000]) #300 frame 고정
+                        numbers.extend([0.000])
                 landmark_frame=[]
                 row=0
-                for i in range(0,70):#총 100프레임으로 고정
+                for i in range(0,70):
                     landmark_frame.extend(numbers[row:row+84])
                     row += 84
                 landmark_frame=np.array(landmark_frame)
-                landmark_frame=landmark_frame.reshape(-1,84)#2차원으로 변환(260*42)
+                landmark_frame=landmark_frame.reshape(-1,84)
                 X.append(np.array(landmark_frame))
                 Y.append(wordname)
         X=np.array(X)
@@ -79,10 +79,8 @@ class Predicter:
     def pred(self):
         # comp='bazel build -c opt --define MEDIAPIPE_DISABLE_GPU=1 \
         # mediapipe/examples/desktop/multi_hand_tracking:multi_hand_tracking_cpu'
-        #명령어 컴파일
         # cmd='GLOG_logtostderr=1 bazel-bin/mediapipe/examples/desktop/multi_hand_tracking/multi_hand_tracking_cpu \
         # --calculator_graph_config_file=mediapipe/graphs/hand_tracking/multi_hand_tracking_desktop_live.pbtxt'
-        #미디어 파이프 명령어 저장
         # listfile=os.listdir(input_data_path)
         # output_dir=""
         filel=[]
@@ -91,7 +89,6 @@ class Predicter:
         #         continue
         #     word=file+'/'
         #     fullfilename=os.listdir(input_data_path+word)
-        #     # 하위디렉토리의 모든 비디오들의 이름을 저장
         #     if not(os.path.isdir(output_data_path+"_"+word)):
         #         os.mkdir(output_data_path+"_"+word)
         #     if not(os.path.isdir(output_data_path+word)):
@@ -106,7 +103,6 @@ class Predicter:
         #         outputfilen='   --output_video_path='+output_data_path+'_'+word+mp4list
         #         cmdret=cmd+inputfilen+outputfilen
         #         os.system(cmdret)
-        #mediapipe동작 작동 종료:
         # output_dir=output_data_path
         output_dir =self.output_data_path
         x_test,Y=self.load_data(output_dir)
@@ -114,8 +110,6 @@ class Predicter:
         #new_model.summary()
 
         labels=self.load_label()
-
-        #모델 사용
     
         xhat = x_test
         yhat = new_model.predict(xhat)
@@ -124,8 +118,8 @@ class Predicter:
         rev_labels = dict(zip(list(labels.values()), list(labels.keys())))
         s=0
         # filel=np.array(filel)
-        # shutil.rmtree('./output')
-        # os.mkdir('./output')
+        shutil.rmtree('./output')
+        os.mkdir('./output')
         
         return rev_labels[predictions[0]]
 

@@ -1,0 +1,2 @@
+import os
+os.system('GLOG_logtostderr=1 bazel-bin/mediapipe/examples/desktop/multi_hand_tracking/multi_hand_tracking_cpu \--calculator_graph_config_file=mediapipe/graphs/hand_tracking/multi_hand_tracking_desktop_live.pbtxt   --input_video_path=./test/word/test.mp4   --output_video_path=./output/_word/test.mp4')
